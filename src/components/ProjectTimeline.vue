@@ -40,8 +40,8 @@
               v-for="(card, i) in displayCards"
               :key="i"
               class="pt-carousel-card"
+              :data-card-idx="i"
               :style="cardStyle(i, displayCards.length)"
-              @click="onCardClick(card, i)"
             >
               <div class="pt-card-inner">
                 <img
@@ -166,21 +166,43 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import imgPage1 from '@/assets/img/project/page1.png'
+import imgPage2 from '@/assets/img/project/page2.JPG'
+import imgPage3 from '@/assets/img/project/page3.JPG'
+import imgPage4 from '@/assets/img/project/page4.JPG'
+import imgPage5 from '@/assets/img/project/page5.JPG'
+import imgPage6 from '@/assets/img/project/page6.JPG'
+
 const { t, tm } = useI18n()
 
 // ── 卡片占位渐变色，顺序与 projectKeys 一一对应 ──
 const CARD_GRADIENTS = [
   'linear-gradient(135deg, #0a2342 0%, #0e4bba 50%, #2997ff 100%)',
   'linear-gradient(135deg, #1a0533 0%, #6b21a8 55%, #c026d3 100%)',
-  'linear-gradient(135deg, #0d2137 0%, #0d7377 55%, #14ffec 100%)'
+  'linear-gradient(135deg, #0d2137 0%, #0d7377 55%, #14ffec 100%)',
+  'linear-gradient(135deg, #1a1a0a 0%, #7c6f14 55%, #f5d020 100%)'
 ]
 
 const CARD_W = 110
 const CARD_H = 148
 
 // 静态结构，文案从 i18n 读取
-const projectKeys = ['huoliGo', 'fourHigh', 'fuwaiWeight']
-const mediaMap = { huoliGo: [], fourHigh: [], fuwaiWeight: [] }
+const projectKeys = ['huoliGo', 'fourHigh', 'fuwaiWeight', 'summaryHighlights']
+const mediaMap = {
+  huoliGo: [
+    { type: 'image', src: imgPage1, alt: '活力Go - 页面1' },
+    { type: 'image', src: imgPage2, alt: '活力Go - 页面2' }
+  ],
+  fourHigh: [
+    { type: 'image', src: imgPage3, alt: '四高一重 - 页面1' },
+    { type: 'image', src: imgPage4, alt: '四高一重 - 页面2' }
+  ],
+  fuwaiWeight: [
+    { type: 'image', src: imgPage5, alt: '阜外减重 - 页面1' },
+    { type: 'image', src: imgPage6, alt: '阜外减重 - 页面2' }
+  ],
+  summaryHighlights: []
+}
 
 const projects = computed(() =>
   projectKeys.map(key => ({
@@ -236,6 +258,7 @@ let isDragging = false
 let hasDragged = false
 let pointerStartX = 0
 let angleOnDragStart = 0
+let pointerDownTarget = null
 
 const stageStyle = computed(() => ({
   transform: `rotateY(${rotationAngle.value}deg)`
@@ -278,6 +301,7 @@ function stopAutoRotate() {
 function onPointerDown(e) {
   isDragging = true
   hasDragged = false
+  pointerDownTarget = e.target
   pointerStartX = e.clientX
   angleOnDragStart = rotationAngle.value
   stopAutoRotate()
@@ -291,15 +315,19 @@ function onPointerMove(e) {
   rotationAngle.value = angleOnDragStart + (e.clientX - pointerStartX) * 0.35
 }
 
-function onPointerUp() {
+function onPointerUp(e) {
   if (!isDragging) return
   isDragging = false
   startAutoRotate()
-}
-
-function onCardClick(card, idx) {
-  if (hasDragged) return
-  openPreview(idx)
+  // setPointerCapture 会把 click 事件吸附到 scene，所以在 pointerup 时手动判断点击的卡片
+  if (!hasDragged && e.type === 'pointerup' && pointerDownTarget) {
+    const cardEl = pointerDownTarget.closest('[data-card-idx]')
+    if (cardEl) {
+      const idx = parseInt(cardEl.dataset.cardIdx)
+      if (!isNaN(idx)) openPreview(idx)
+    }
+  }
+  pointerDownTarget = null
 }
 
 // ── 切换项目时重置轮播（immediate 确保初始选中也启动旋转）──
@@ -801,25 +829,31 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: min(80vw, 480px);
+  max-width: min(88vw, 640px);
   max-height: 80vh;
 }
 
 .lb-card-wrap {
-  width: min(72vw, 340px);
-  height: min(72vw * 1.36, 460px);
+  max-width: min(88vw, 640px);
+  max-height: 78vh;
   border-radius: 18px;
   overflow: hidden;
   box-shadow:
     0 24px 80px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lb-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: min(88vw, 640px);
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
+  border-radius: 18px;
 }
 
 .lb-placeholder {

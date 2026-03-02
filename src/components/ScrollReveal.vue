@@ -1,9 +1,7 @@
 <template>
-  <div
-    ref="root"
+  <div ref="root"
     class="scroll-reveal"
-    :class="{ 'scroll-reveal--visible': isVisible }"
-  >
+    :class="{ 'scroll-reveal--visible': isVisible }">
     <slot></slot>
   </div>
 </template>

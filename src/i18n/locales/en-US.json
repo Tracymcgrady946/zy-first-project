@@ -80,6 +80,18 @@
         "Doctor-patient messaging system supporting rich media and follow-up reminders"
       ],
       "thought": "This hospital project made me realize that deep collaboration with back-end engineers and product managers matters more than any technology choice. The rigor of workflow design directly impacts real patient outcomes — even a single poorly worded button label could cause genuine medical misunderstanding. It reshaped my understanding of what 'responsible front-end development' truly means."
+    },
+    "summaryHighlights": {
+      "name": "Summary — Project Highlights",
+      "techs": [
+        "Abstracted a cross-project reusable component library with unified design language",
+        "Performance optimizations — virtual scrolling, lazy loading, code splitting — 40%+ faster first paint",
+        "Generic request layer encapsulating Token refresh, error-code mapping, and graceful fallback",
+        "RBAC-based multi-role permission system with menu- and button-level granularity",
+        "Dual-engine visualization strategy with ECharts + Canvas, balancing flexibility and render performance",
+        "Established front-end engineering standards: ESLint + Prettier + Husky for team-wide consistency"
+      ],
+      "thought": "Looking back across multiple projects, what truly drove my growth wasn't any single technology — it was the 'systems thinking' forged through tackling different business domains. How to design a front-end architecture that iterates quickly yet stays robust is the question I keep returning to. Every project's pain point is a refactoring opportunity, and every refactoring deepens my belief that simplicity is correctness."
     }
   },
   "timeline": {
