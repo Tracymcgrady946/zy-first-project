@@ -4,7 +4,13 @@
     "about": "About",
     "weather": "Weather",
     "calendar": "Calendar",
+    "dreamCar": "Dream Car",
     "contact": "Contact"
+  },
+  "dreamCar": {
+    "sub": "Dream Car",
+    "title": "Xiaomi YU 7",
+    "desc": "Where intelligent driving meets exceptional design — a car built for the future."
   },
   "hero": {
     "name": "Zhang Yue",
@@ -36,6 +42,24 @@
     "contact": {
       "title": "Get in Touch",
       "description": "Have an idea or want to collaborate? Reach out via email or social platforms."
+    }
+  },
+  "timeline": {
+    "title": "My Journey",
+    "subtitle": "Select a year to relive the moments",
+    "dragHint": "Drag to rotate",
+    "emptyHint": "Select a year on the left",
+    "placeholder": {
+      "image": "Image slot",
+      "video": "Video slot"
+    },
+    "nodes": {
+      "2025": "Present Day",
+      "2024": "Chasing Dreams",
+      "2023": "Exploring Horizons",
+      "2022": "Growing & Reflecting",
+      "2021": "Cherished Memories",
+      "2020": "New Beginnings"
     }
   },
   "calendar": {

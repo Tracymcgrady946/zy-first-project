@@ -4,7 +4,13 @@
     "about": "关于",
     "weather": "天气",
     "calendar": "日历",
+    "dreamCar": "梦想座驾",
     "contact": "联系"
+  },
+  "dreamCar": {
+    "sub": "Dream Car",
+    "title": "小米 YU 7",
+    "desc": "智能驾驶与极致设计的融合，这是属于未来的座驾。"
   },
   "hero": {
     "name": "张岳",
@@ -36,6 +42,24 @@
     "contact": {
       "title": "保持联系",
       "description": "有想法或合作意向，欢迎通过邮件或社交平台联系我。"
+    }
+  },
+  "timeline": {
+    "title": "时光轨迹",
+    "subtitle": "点击节点，重温精彩瞬间",
+    "dragHint": "拖动旋转",
+    "emptyHint": "选择左侧年份",
+    "placeholder": {
+      "image": "图片占位",
+      "video": "视频占位"
+    },
+    "nodes": {
+      "2025": "当下此刻",
+      "2024": "逐梦前行",
+      "2023": "探索远方",
+      "2022": "沉淀成长",
+      "2021": "温暖记忆",
+      "2020": "新的起点"
     }
   },
   "calendar": {
