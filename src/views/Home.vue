@@ -42,7 +42,7 @@ import CalendarWidget from '@/components/CalendarWidget.vue'
 import DreamCarSection from '@/components/DreamCarSection.vue'
 import ProjectTimeline from '@/components/ProjectTimeline.vue'
 import { typewriterConfig, sectionConfig } from '@/config/profile.js'
-import heroPhoto from '@/assets/img/elon_musk_PNG43.png'
+import heroPhoto from '@/assets/img/elon_musk_PNG43.jpg'
 
 const { t, tm } = useI18n()
 

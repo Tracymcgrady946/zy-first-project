@@ -166,7 +166,7 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import imgPage1 from '@/assets/img/project/page1.png'
+import imgPage1 from '@/assets/img/project/page1.jpg'
 import imgPage2 from '@/assets/img/project/page2.JPG'
 import imgPage3 from '@/assets/img/project/page3.JPG'
 import imgPage4 from '@/assets/img/project/page4.JPG'
