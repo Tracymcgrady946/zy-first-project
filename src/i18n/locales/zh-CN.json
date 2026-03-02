@@ -20,11 +20,11 @@
       "一名用 Vue 把想法做成产品的前端工程师。",
       "广阔天地、大有作为。"
     ],
-    "infoGender": "性别 ： 男",
-    "infoHobbies": "兴趣爱好 ： 打篮球 · 滑雪",
-    "infoLocation": "坐标 ： 上海",
-    "infoFavCities": "最喜欢的城市 ： 青岛 · 杭州 · 万宁 · 瓦纳卡",
-    "infoGoals": "2026 学习目标 ： English · AI 在前端的实践 · AI 在各行业的应用"
+    "infoGender":   { "label": "性别",     "value": "男" },
+    "infoHobbies":  { "label": "爱好",     "value": "篮球 · 滑雪" },
+    "infoLocation": { "label": "坐标",     "value": "上海" },
+    "infoFavCities":{ "label": "最爱城市", "value": "青岛 · 杭州 · 万宁 · 瓦纳卡" },
+    "infoGoals":    { "label": "2026 目标","value": "English · AI 前端实践 · AI 跨行业" }
   },
   "section": {
     "about": {

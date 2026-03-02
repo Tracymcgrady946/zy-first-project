@@ -20,11 +20,11 @@
       "A front-end engineer who turns ideas into products with Vue.",
       "The world is vast — make your mark."
     ],
-    "infoGender": "Gender ： Male",
-    "infoHobbies": "Hobbies ： Basketball · Skiing",
-    "infoLocation": "Based in ： Shanghai",
-    "infoFavCities": "Fav. Cities ： Qingdao · Hangzhou · Wanning · Wānaka",
-    "infoGoals": "2026 Goals ： English · AI in Front-End · AI Across Industries"
+    "infoGender":   { "label": "Gender",      "value": "Male" },
+    "infoHobbies":  { "label": "Hobbies",     "value": "Basketball · Skiing" },
+    "infoLocation": { "label": "Based in",    "value": "Shanghai" },
+    "infoFavCities":{ "label": "Fav. Cities", "value": "Qingdao · Hangzhou · Wanning · Wānaka" },
+    "infoGoals":    { "label": "2026 Goals",  "value": "English · AI Front-End · AI Industries" }
   },
   "section": {
     "about": {

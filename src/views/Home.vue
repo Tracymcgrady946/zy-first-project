@@ -60,12 +60,12 @@ const hero = computed(() => ({
   role: t('hero.role'),
   introLines: tm('hero.introLines'),
   infoList: [
-    { text: t('hero.infoGender') },
-    { text: t('hero.infoHobbies') },
-    { text: t('hero.infoLocation') },
-    { text: t('hero.infoFavCities') },
-    { text: t('hero.infoGoals') },
-    { text: 'xx@gmail.com', href: 'mailto:xx@gmail.com' }
+    { icon: '♂',  label: t('hero.infoGender.label'),    value: t('hero.infoGender.value') },
+    { icon: '✦',  label: t('hero.infoHobbies.label'),   value: t('hero.infoHobbies.value') },
+    { icon: '◎',  label: t('hero.infoLocation.label'),  value: t('hero.infoLocation.value') },
+    { icon: '✈',  label: t('hero.infoFavCities.label'), value: t('hero.infoFavCities.value') },
+    { icon: '◈',  label: t('hero.infoGoals.label'),     value: t('hero.infoGoals.value') },
+    { icon: '@',  label: 'Email', value: 'xx@gmail.com', href: 'mailto:xx@gmail.com' }
   ],
   photoUrl: photoUrl.value,
   photoAlt: t('hero.name'),

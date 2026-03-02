@@ -30,9 +30,11 @@
       </div>
 
       <ul class="hero-info">
-        <li v-for="(item, index) in hero.infoList" :key="index">
-          <a v-if="item.href" :href="item.href">{{ item.text }}</a>
-          <template v-else>{{ item.text }}</template>
+        <li v-for="(item, index) in hero.infoList" :key="index" class="info-row">
+          <span class="info-icon">{{ item.icon }}</span>
+          <span class="info-label">{{ item.label }}</span>
+          <a v-if="item.href" class="info-value info-link" :href="item.href">{{ item.value }}</a>
+          <span v-else class="info-value">{{ item.value }}</span>
         </li>
       </ul>
     </div>
@@ -231,40 +233,69 @@ onBeforeUnmount(() => {
 /* ── Info List ── */
 .hero-info {
   list-style: none;
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 13px;
-  letter-spacing: 0.01em;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 28px;
+  padding: 14px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.hero-info li {
-  margin-bottom: 5px;
-  background: linear-gradient(90deg, #f5f5f7 0%, #2997ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.info-row {
+  display: grid;
+  grid-template-columns: 22px 72px 1fr;
+  align-items: baseline;
+  gap: 0 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.18s;
 }
 
-.hero-info li:last-child {
-  margin-bottom: 0;
+.info-row + .info-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.hero-info a {
-  background: linear-gradient(90deg, #f5f5f7 0%, #2997ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.info-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.info-icon {
+  font-size: 12px;
+  color: #2997ff;
+  opacity: 0.7;
+  text-align: center;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+.info-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--apple-text-secondary);
+  opacity: 0.6;
+  white-space: nowrap;
+  line-height: 1.8;
+}
+
+.info-value {
+  font-size: 12.5px;
+  color: #e2e2e7;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.info-link {
+  color: #2997ff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.info-link:hover {
+  opacity: 0.75;
   text-decoration: underline;
-  text-decoration-color: rgba(245, 245, 247, 0.3);
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s ease;
-}
-
-.hero-info a:hover {
-  text-decoration-color: #2997ff;
+  text-decoration-color: rgba(41, 151, 255, 0.45);
+  text-underline-offset: 2px;
 }
 
 /* ── Responsive: Stack on mobile ── */
