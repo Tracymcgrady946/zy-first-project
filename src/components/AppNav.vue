@@ -27,7 +27,7 @@
         :key="item.href"
         :href="item.href"
         class="mobile-menu-link"
-        @click="menuOpen = false"
+        @click.prevent="onMobileNavClick(item.href)"
       >{{ item.label }}</a>
     </div>
   </Transition>
@@ -51,6 +51,17 @@ defineProps({
 
 const { locale, toggleLocale } = useLocale()
 const menuOpen = ref(false)
+
+function onMobileNavClick(href) {
+  menuOpen.value = false
+  const id = href.replace('#', '')
+  setTimeout(() => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 300)
+}
 </script>
 
 <style scoped>
@@ -249,13 +260,7 @@ const menuOpen = ref(false)
   }
 }
 
-/* 桌面端：隐藏下拉菜单相关 */
 @media (min-width: 601px) {
-  .mobile-menu,
-  .mobile-overlay {
-    display: none !important;
-  }
-
   .apple-nav a { padding: 8px 10px; min-width: auto; }
 }
 </style>

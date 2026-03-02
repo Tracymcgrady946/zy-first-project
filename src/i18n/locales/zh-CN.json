@@ -46,6 +46,7 @@
   },
   "project": {
     "dragHint": "拖动旋转",
+    "emptyHint": "点击上方项目节点查看详情",
     "techTitle": "技术亮点",
     "thoughtTitle": "项目思考",
     "huoliGo": {

@@ -47,10 +47,7 @@ const todayDate = now.getDate()
 
 const calendarTitle = computed(() => {
   const d = new Date(year.value, month.value)
-  if (locale.value === 'zh-CN') {
-    return `${year.value} 年 ${month.value + 1} 月`
-  }
-  return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' }).format(d)
+  return new Intl.DateTimeFormat(locale.value, { year: 'numeric', month: 'long' }).format(d)
 })
 
 const cells = computed(() => {

@@ -9,11 +9,19 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+const props = defineProps({
+  skip: { type: Boolean, default: false }
+})
+
 const root = ref(null)
 const isVisible = ref(false)
 let observer = null
 
 onMounted(() => {
+  if (props.skip) {
+    isVisible.value = true
+    return
+  }
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

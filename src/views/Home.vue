@@ -1,7 +1,7 @@
 <template>
   <div class="page-home">
     <AppNav :items="navItems" />
-    <ScrollReveal>
+    <ScrollReveal :skip="true">
       <HeroSection :hero="hero"
         @photo-error="onHeroPhotoError" />
     </ScrollReveal>

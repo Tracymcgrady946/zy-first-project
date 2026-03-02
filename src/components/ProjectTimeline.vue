@@ -98,7 +98,7 @@
     <Transition name="hint-fade">
       <div v-if="!selectedProject" class="pt-empty-hint">
         <div class="pt-hint-arrow">↑</div>
-        <p>点击上方项目节点查看详情</p>
+        <p>{{ t('project.emptyHint') }}</p>
       </div>
     </Transition>
   </div>

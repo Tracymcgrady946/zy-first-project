@@ -46,6 +46,7 @@
   },
   "project": {
     "dragHint": "Drag to rotate",
+    "emptyHint": "Click a project node above to view details",
     "techTitle": "Tech Highlights",
     "thoughtTitle": "Reflections",
     "huoliGo": {

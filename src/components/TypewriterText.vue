@@ -1,8 +1,5 @@
 <template>
-  <span>
-    <span v-for="(char, i) in displayedChars" :key="i">{{ char }}</span>
-    <span v-if="showCursor" class="typewriter-cursor"></span>
-  </span>
+  <span>{{ displayedText }}<span v-if="showCursor" class="typewriter-cursor"></span></span>
 </template>
 
 <script setup>
@@ -15,18 +12,18 @@ const props = defineProps({
   showCursor: { type: Boolean, default: true }
 })
 
-const displayedChars = ref([])
+const displayedText = ref('')
 let timer = null
 
 function typeNext(index) {
   if (index >= props.text.length) return
-  displayedChars.value.push(props.text[index])
+  displayedText.value += props.text[index]
   timer = setTimeout(() => typeNext(index + 1), props.speed)
 }
 
 watch(() => props.text, () => {
   clearTimeout(timer)
-  displayedChars.value = []
+  displayedText.value = ''
   if (!props.text) return
   timer = setTimeout(() => typeNext(0), props.startAfter)
 }, { immediate: true })

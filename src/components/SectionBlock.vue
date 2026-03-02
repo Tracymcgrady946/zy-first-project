@@ -46,10 +46,10 @@ const sectionThemeClass = computed(() => props.theme ? `section-${props.theme}` 
 
 @media (min-width: 480px) {
   .section {
-    padding: 72px 24px 88px;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-bottom: 88px;
+    padding-top: 72px;
+    padding-left: calc(24px + env(safe-area-inset-left));
+    padding-right: calc(24px + env(safe-area-inset-right));
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
   }
 }
 

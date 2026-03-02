@@ -4,6 +4,8 @@ import enUS from './locales/en-US.json'
 
 const savedLocale = localStorage.getItem('locale') || 'zh-CN'
 
+document.documentElement.lang = savedLocale === 'zh-CN' ? 'zh-CN' : 'en'
+
 export const i18n = createI18n({
   legacy: false,
   locale: savedLocale,

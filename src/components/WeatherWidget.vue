@@ -85,11 +85,9 @@ const locationName = computed(() =>
 const forecastDisplay = computed(() =>
   rawForecast.value.map(item => {
     const key = getWeatherKey(item.code)
-    // 用 Intl.DateTimeFormat 获取本地化星期名，无需在 JSON 中维护
-    const weekdayDate = new Date(2017, 0, item.dayOfWeek + 1)
     return {
       ...item,
-      weekday: new Intl.DateTimeFormat(locale.value, { weekday: 'short' }).format(weekdayDate),
+      weekday: new Intl.DateTimeFormat(locale.value, { weekday: 'short' }).format(new Date(item.dateStr)),
       icon: WEATHER_ICONS[key],
       desc: t(`weather.desc.${key}`)
     }
@@ -104,15 +102,15 @@ async function fetchWeather(latVal, lonVal) {
       `https://api.open-meteo.com/v1/forecast` +
       `?latitude=${latVal}&longitude=${lonVal}` +
       `&daily=weather_code,temperature_2m_max,temperature_2m_min` +
-      `&timezone=Asia%2FShanghai&forecast_days=15`
+      `&timezone=auto&forecast_days=15`
     const res = await fetch(url)
     if (!res.ok) throw new Error(t('weather.unavailable'))
     const data = await res.json()
     rawForecast.value = data.daily.time.map((dateStr, i) => {
       const d = new Date(dateStr)
       return {
+        dateStr,
         date: `${d.getMonth() + 1}/${d.getDate()}`,
-        dayOfWeek: d.getDay(),
         code: data.daily.weather_code[i],
         max: Math.round(data.daily.temperature_2m_max[i]),
         min: Math.round(data.daily.temperature_2m_min[i])
