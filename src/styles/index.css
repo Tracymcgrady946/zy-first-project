@@ -1,0 +1,17 @@
+@import './variables.css';
+@import './base.css';
+
+/* 打字机光标（TypewriterText 组件使用，无 scoped） */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--apple-text);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

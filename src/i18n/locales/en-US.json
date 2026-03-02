@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "intro": "Intro",
+    "about": "About",
+    "weather": "Weather",
+    "calendar": "Calendar",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Zhang Yue",
+    "role": "Front-End Engineer · Personal Page",
+    "introLines": [
+      "Hi, I'm Zhang Yue.",
+      "A front-end engineer who turns ideas into products with Vue.",
+      "The world is vast — make your mark."
+    ],
+    "infoGender": "Gender ： Male",
+    "infoHobbies": "Hobbies ： Basketball · Skiing",
+    "infoLocation": "Based in ： Shanghai",
+    "infoFavCities": "Fav. Cities ： Qingdao · Hangzhou · Wanning · Wānaka",
+    "infoGoals": "2026 Goals ： English · AI in Front-End · AI Across Industries"
+  },
+  "section": {
+    "about": {
+      "title": "About Me",
+      "description": "Front-end developer specializing in the Vue ecosystem. I believe great code and design transform user experiences, focused on shipping real products."
+    },
+    "weather": {
+      "title": "15-Day Forecast",
+      "description": "Live local weather forecast to help you plan the next two weeks."
+    },
+    "calendar": {
+      "title": "Calendar",
+      "description": "Browse the monthly calendar and keep track of your dates."
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "description": "Have an idea or want to collaborate? Reach out via email or social platforms."
+    }
+  },
+  "calendar": {
+    "weekdays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "today": "Today",
+    "backToToday": "Back to Today"
+  },
+  "weather": {
+    "loading": "Loading weather data…",
+    "retry": "Retry",
+    "locating": "Locating…",
+    "myLocation": "📡 My Location",
+    "today": "Today",
+    "noGeo": "Geolocation is not supported",
+    "geoFail": "Location failed, showing default city",
+    "unavailable": "Weather service unavailable",
+    "fetchFail": "Failed to fetch weather, please try again",
+    "currentLocation": "Current Location",
+    "defaultCity": "Shanghai",
+    "desc": {
+      "clear": "Clear",
+      "partlyCloudy": "Partly Cloudy",
+      "overcast": "Overcast",
+      "fog": "Fog",
+      "drizzle": "Drizzle",
+      "rain": "Rain",
+      "freezingRain": "Freezing Rain",
+      "snow": "Snow",
+      "showers": "Showers",
+      "snowShowers": "Snow Showers",
+      "thunderstorm": "Thunderstorm"
+    }
+  }
+}

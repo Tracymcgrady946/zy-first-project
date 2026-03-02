@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "intro": "介绍",
+    "about": "关于",
+    "weather": "天气",
+    "calendar": "日历",
+    "contact": "联系"
+  },
+  "hero": {
+    "name": "张岳",
+    "role": "前端工程师 · 个人介绍",
+    "introLines": [
+      "你好，我是张岳。",
+      "一名用 Vue 把想法做成产品的前端工程师。",
+      "广阔天地、大有作为。"
+    ],
+    "infoGender": "性别 ： 男",
+    "infoHobbies": "兴趣爱好 ： 打篮球 · 滑雪",
+    "infoLocation": "坐标 ： 上海",
+    "infoFavCities": "最喜欢的城市 ： 青岛 · 杭州 · 万宁 · 瓦纳卡",
+    "infoGoals": "2026 学习目标 ： English · AI 在前端的实践 · AI 在各行业的应用"
+  },
+  "section": {
+    "about": {
+      "title": "关于我",
+      "description": "前端开发工程师，主攻 Vue 技术栈。相信代码与设计能改变体验，专注把想法落地成可用的产品。"
+    },
+    "weather": {
+      "title": "未来 15 天天气",
+      "description": "实时获取当地天气预报，掌握两周内的气象变化。"
+    },
+    "calendar": {
+      "title": "日历",
+      "description": "浏览月份日历，随时查看日期安排。"
+    },
+    "contact": {
+      "title": "保持联系",
+      "description": "有想法或合作意向，欢迎通过邮件或社交平台联系我。"
+    }
+  },
+  "calendar": {
+    "weekdays": ["日", "一", "二", "三", "四", "五", "六"],
+    "today": "今天",
+    "backToToday": "回到今天"
+  },
+  "weather": {
+    "loading": "正在获取天气数据…",
+    "retry": "重试",
+    "locating": "定位中…",
+    "myLocation": "📡 我的位置",
+    "today": "今天",
+    "noGeo": "浏览器不支持定位",
+    "geoFail": "定位失败，已显示默认城市天气",
+    "unavailable": "天气服务暂时不可用",
+    "fetchFail": "获取天气失败，请稍后重试",
+    "currentLocation": "当前位置",
+    "defaultCity": "上海",
+    "desc": {
+      "clear": "晴",
+      "partlyCloudy": "少云",
+      "overcast": "阴",
+      "fog": "雾",
+      "drizzle": "毛毛雨",
+      "rain": "雨",
+      "freezingRain": "冻雨",
+      "snow": "雪",
+      "showers": "阵雨",
+      "snowShowers": "阵雪",
+      "thunderstorm": "雷暴"
+    }
+  }
+}

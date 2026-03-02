@@ -1,0 +1,11 @@
+/* 设计变量：暗色主题 */
+:root {
+  --apple-bg: #000000;
+  --apple-bg-hero: #0a0a0a;
+  --apple-bg-section: #0d0d0d;
+  --apple-text: #f5f5f7;
+  --apple-text-secondary: #a1a1a6;
+  --apple-link: #2997ff;
+  --apple-gray: #86868b;
+  --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans SC", "Helvetica Neue", sans-serif;
+}
