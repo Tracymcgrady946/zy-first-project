@@ -41,7 +41,7 @@ const { locale, toggleLocale } = useLocale()
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -63,8 +63,8 @@ const { locale, toggleLocale } = useLocale()
 }
 
 @media (min-width: 480px) {
-  .apple-nav { gap: 8px; }
-  .apple-nav a { padding: 8px 20px; min-width: auto; }
+  .apple-nav { gap: 2px; }
+  .apple-nav a { padding: 8px 10px; min-width: auto; }
 }
 
 .apple-nav a:hover {

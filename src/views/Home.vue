@@ -12,6 +12,7 @@
         :description="section.description"
         :theme="section.theme"
         :tech-links="section.techLinks">
+        <ProjectTimeline v-if="section.id === 'about'" />
         <WeatherWidget v-if="section.id === 'weather'" />
         <CalendarWidget v-if="section.id === 'calendar'" />
       </SectionBlock>
@@ -39,6 +40,7 @@ import ScrollReveal from '@/components/ScrollReveal.vue'
 import WeatherWidget from '@/components/WeatherWidget.vue'
 import CalendarWidget from '@/components/CalendarWidget.vue'
 import DreamCarSection from '@/components/DreamCarSection.vue'
+import ProjectTimeline from '@/components/ProjectTimeline.vue'
 import { typewriterConfig, sectionConfig } from '@/config/profile.js'
 import heroPhoto from '@/assets/img/elon_musk_PNG43.png'
 

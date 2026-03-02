@@ -2,9 +2,10 @@ export default {
   zh: {
     nav: {
       intro: '介绍',
-      about: '关于',
+      about: '项目经历',
       weather: '天气',
       calendar: '日历',
+      dreamCar: '梦想座驾',
       contact: '联系'
     },
     hero: {
@@ -23,10 +24,10 @@ export default {
         { text: 'xx@gmail.com', href: 'mailto:xx@gmail.com' }
       ]
     },
-    sections: {
+    section: {
       about: {
-        title: '关于我',
-        description: '前端开发工程师，主攻 Vue 技术栈。相信代码与设计能改变体验，专注把想法落地成可用的产品。'
+        title: '项目经历',
+        description: '在以往项目中获得的经验以及思考'
       },
       weather: {
         title: '未来 15 天天气',
@@ -96,9 +97,10 @@ export default {
   en: {
     nav: {
       intro: 'Intro',
-      about: 'About',
+      about: 'Projects',
       weather: 'Weather',
       calendar: 'Calendar',
+      dreamCar: 'Dream Car',
       contact: 'Contact'
     },
     hero: {
@@ -117,10 +119,10 @@ export default {
         { text: 'xx@gmail.com', href: 'mailto:xx@gmail.com' }
       ]
     },
-    sections: {
+    section: {
       about: {
-        title: 'About Me',
-        description: 'Front-end developer specializing in the Vue ecosystem. I believe great code and design transform user experiences, focused on shipping real products.'
+        title: 'Project Experience',
+        description: 'Experience and reflections gained from previous projects.'
       },
       weather: {
         title: '15-Day Forecast',

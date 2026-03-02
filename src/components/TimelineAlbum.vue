@@ -108,7 +108,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -148,7 +148,7 @@ const timelineNodes = computed(() =>
 const PLACEHOLDER_COUNT = 5
 const CARD_W = 130
 
-const selectedIdx = ref(null)
+const selectedIdx = ref(0)
 const rotationAngle = ref(0)
 const sceneRef = ref(null)
 
@@ -246,6 +246,7 @@ function onPointerUp() {
   startAutoRotate()
 }
 
+onMounted(startAutoRotate)
 onBeforeUnmount(stopAutoRotate)
 </script>
 

@@ -1,7 +1,7 @@
 {
   "nav": {
     "intro": "Intro",
-    "about": "About",
+    "about": "Projects",
     "weather": "Weather",
     "calendar": "Calendar",
     "dreamCar": "Dream Car",
@@ -28,8 +28,8 @@
   },
   "section": {
     "about": {
-      "title": "About Me",
-      "description": "Front-end developer specializing in the Vue ecosystem. I believe great code and design transform user experiences, focused on shipping real products."
+      "title": "Project Experience",
+      "description": "Experience and reflections gained from previous projects."
     },
     "weather": {
       "title": "15-Day Forecast",
@@ -42,6 +42,44 @@
     "contact": {
       "title": "Get in Touch",
       "description": "Have an idea or want to collaborate? Reach out via email or social platforms."
+    }
+  },
+  "project": {
+    "dragHint": "Drag to rotate",
+    "techTitle": "Tech Highlights",
+    "thoughtTitle": "Reflections",
+    "huoliGo": {
+      "name": "Vitality Go",
+      "techs": [
+        "Built mobile H5 with Vue3 + Vite, unified state management via Pinia",
+        "Canvas-based activity trail and heatmap visualizations",
+        "Deep integration with Amap SDK for real-time location and route planning",
+        "Custom WebSocket heartbeat mechanism for stable real-time messaging",
+        "Unified request interceptor with Token refresh and graceful error fallback"
+      ],
+      "thought": "In health-focused products, data visualization is the key driver of user motivation — yet information overload can easily cause anxiety. Finding the balance between 'meaningful feedback' and 'lightweight experience' was the central design question I wrestled with. It also taught me that a front-end engineer's depth of product understanding directly shapes the quality of their component design."
+    },
+    "fourHigh": {
+      "name": "Four-High One-Heavy",
+      "techs": [
+        "Vue3 + Element Plus mid-to-back-end architecture with modular role-based routing",
+        "ECharts multi-dimensional health trend charts for BP, glucose, lipids, and more",
+        "JSON Schema-driven dynamic forms supporting conditional logic and multiple field types",
+        "Virtual scrolling optimization for tens-of-thousands patient lists — 60% faster first paint",
+        "RBAC model enforcing permission isolation across doctor, nurse, and admin roles"
+      ],
+      "thought": "In chronic disease management, doctors and patients have completely opposite information-density needs — doctors require dense dashboards while patients need ultra-simple guidance. Designing a component library that serves two radically different user mindsets simultaneously was the biggest challenge, and it gave me a much deeper appreciation of 'role-centered design'."
+    },
+    "fuwaiWeight": {
+      "name": "Fuwai Weight Management",
+      "techs": [
+        "Cross-platform development with uni-app, isomorphic across WeChat Mini Program and H5",
+        "Weight / BMI trend chart with milestone annotations and celebration animations",
+        "Meal-tracking module with calorie calculation and nutrient analysis logic",
+        "RESTful API integration with hospital HIS systems, handling complex data mapping",
+        "Doctor-patient messaging system supporting rich media and follow-up reminders"
+      ],
+      "thought": "This hospital project made me realize that deep collaboration with back-end engineers and product managers matters more than any technology choice. The rigor of workflow design directly impacts real patient outcomes — even a single poorly worded button label could cause genuine medical misunderstanding. It reshaped my understanding of what 'responsible front-end development' truly means."
     }
   },
   "timeline": {
