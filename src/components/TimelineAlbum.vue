@@ -75,7 +75,9 @@
                   <template v-else>
                     <img v-if="card.src"
                       :src="card.src"
-                      :alt="card.alt || ''" />
+                      :alt="card.alt || ''"
+                      loading="lazy"
+                      decoding="async" />
                     <div v-else
                       class="card-placeholder">
                       <div class="ph-icon ph-icon--img"></div>
@@ -111,19 +113,20 @@
       </Transition>
     </div>
   </div>
-  <MediaPreview :cards="displayCards" v-model="previewIdx" />
+  <MediaPreview :cards="displayCards"
+    v-model="previewIdx" />
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import MediaPreview from './MediaPreview.vue'
-import ph1 from '@/assets/img/project/page1.jpg'
-import ph2 from '@/assets/img/project/page2.JPG'
-import ph3 from '@/assets/img/project/page3.JPG'
-import ph4 from '@/assets/img/project/page4.JPG'
-import ph5 from '@/assets/img/project/page5.JPG'
-import ph6 from '@/assets/img/project/page6.JPG'
+import ph1 from '@/assets/img/profile/page1.png'
+import ph2 from '@/assets/img/profile/page2.png'
+import ph3 from '@/assets/img/profile/page3.png'
+import ph4 from '@/assets/img/profile/page4.png'
+import ph5 from '@/assets/img/profile/page5.png'
+import ph6 from '@/assets/img/profile/page6.png'
 
 const { t } = useI18n()
 

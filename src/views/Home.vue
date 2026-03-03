@@ -37,14 +37,8 @@
 
     <DreamCarSection />
 
-    <ScrollReveal v-for="section in sectionsAfterDreamCar"
-      :key="section.id">
-      <SectionBlock :section-id="section.id"
-        :title="section.title"
-        :description="section.description"
-        :theme="section.theme"
-        :tech-links="section.techLinks">
-      </SectionBlock>
+    <ScrollReveal>
+      <AiDynamics />
     </ScrollReveal>
   </div>
 </template>
@@ -61,6 +55,7 @@ import CalendarWidget from '@/components/CalendarWidget.vue'
 import DreamCarSection from '@/components/DreamCarSection.vue'
 import ProjectTimeline from '@/components/ProjectTimeline.vue'
 import BookshelfSection from '@/components/BookshelfSection.vue'
+import AiDynamics from '@/components/AiDynamics.vue'
 import { typewriterConfig, sectionConfig } from '@/config/profile.js'
 import heroPhoto from '@/assets/img/elon_musk_PNG43.jpg'
 
@@ -111,10 +106,6 @@ const aboutSection = computed(() =>
 
 const sectionsMiddle = computed(() =>
   allSections.value.filter(s => !['about', 'contact'].includes(s.id))
-)
-
-const sectionsAfterDreamCar = computed(() =>
-  allSections.value.filter(s => s.id === 'contact')
 )
 
 function onHeroPhotoError () {

@@ -6,7 +6,7 @@
     "weather": "天气",
     "calendar": "日历",
     "dreamCar": "梦想座驾",
-    "contact": "联系"
+    "contact": "AI 动态"
   },
   "dreamCar": {
     "sub": "Dream Car",
@@ -45,8 +45,8 @@
       "description": "在书架上取下一本，翻开那些改变过我思考方式的文字。"
     },
     "contact": {
-      "title": "保持联系",
-      "description": "有想法或合作意向，欢迎通过邮件或社交平台联系我。"
+      "title": "AI 动态",
+      "description": "聚合最新 AI 头条、知乎热议与 GitHub 爆火项目，随时掌握前沿脉搏。"
     }
   },
   "project": {

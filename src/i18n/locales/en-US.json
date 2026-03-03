@@ -6,7 +6,7 @@
     "weather": "Weather",
     "calendar": "Calendar",
     "dreamCar": "Dream Car",
-    "contact": "Contact"
+    "contact": "AI Pulse"
   },
   "dreamCar": {
     "sub": "Dream Car",
@@ -45,8 +45,8 @@
       "description": "Pick a book off the shelf and explore the words that changed the way I think."
     },
     "contact": {
-      "title": "Get in Touch",
-      "description": "Have an idea or want to collaborate? Reach out via email or social platforms."
+      "title": "AI Pulse",
+      "description": "Aggregating the latest AI headlines, Zhihu discussions, and trending GitHub projects."
     }
   },
   "project": {

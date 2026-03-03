@@ -1,5 +1,7 @@
 <template>
-  <section class="hero" :class="{ 'hero--scrolled': isScrolled }" id="intro">
+  <section class="hero"
+    :class="{ 'hero--scrolled': isScrolled }"
+    id="intro">
     <!-- Left Column: Personal Info -->
     <div class="hero-left">
       <header class="hero-header">
@@ -7,34 +9,33 @@
         <p class="hero-role">{{ hero.role }}</p>
       </header>
 
-      <img
-        class="hero-photo"
+      <img class="hero-photo"
         :src="hero.photoUrl"
         :alt="hero.photoAlt"
-        @error="onPhotoError"
-      />
+        @error="onPhotoError" />
 
       <div class="hero-intro">
-        <p
-          v-for="(line, index) in hero.introLines"
+        <p v-for="(line, index) in hero.introLines"
           :key="index"
-          class="intro-line"
-        >
-          <TypewriterText
-            :text="line"
+          class="intro-line">
+          <TypewriterText :text="line"
             :speed="hero.typewriterSpeed"
             :start-after="getLineStartAfter(index)"
-            :show-cursor="hero.showCursor"
-          />
+            :show-cursor="hero.showCursor" />
         </p>
       </div>
 
       <ul class="hero-info">
-        <li v-for="(item, index) in hero.infoList" :key="index" class="info-row">
+        <li v-for="(item, index) in hero.infoList"
+          :key="index"
+          class="info-row">
           <span class="info-icon">{{ item.icon }}</span>
           <span class="info-label">{{ item.label }}</span>
-          <a v-if="item.href" class="info-value info-link" :href="item.href">{{ item.value }}</a>
-          <span v-else class="info-value">{{ item.value }}</span>
+          <a v-if="item.href"
+            class="info-value info-link"
+            :href="item.href">{{ item.value }}</a>
+          <span v-else
+            class="info-value">{{ item.value }}</span>
         </li>
       </ul>
     </div>
@@ -63,7 +64,7 @@ const emit = defineEmits(['photo-error'])
 const isScrolled = ref(false)
 let scrollTicking = false
 
-function onScroll() {
+function onScroll () {
   if (scrollTicking) return
   scrollTicking = true
   requestAnimationFrame(() => {
@@ -72,7 +73,7 @@ function onScroll() {
   })
 }
 
-function getLineStartAfter(index) {
+function getLineStartAfter (index) {
   const { introLines, typewriterSpeed, typewriterStartAfter } = props.hero
   if (index === 0) return typewriterStartAfter
   let delay = typewriterStartAfter
@@ -83,7 +84,7 @@ function getLineStartAfter(index) {
   return delay
 }
 
-function onPhotoError() {
+function onPhotoError () {
   emit('photo-error')
 }
 
