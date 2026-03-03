@@ -2,6 +2,7 @@
   "nav": {
     "intro": "Intro",
     "about": "Projects",
+    "reading": "Reading",
     "weather": "Weather",
     "calendar": "Calendar",
     "dreamCar": "Dream Car",
@@ -38,6 +39,10 @@
     "calendar": {
       "title": "Calendar",
       "description": "Browse the monthly calendar and keep track of your dates."
+    },
+    "reading": {
+      "title": "Reading",
+      "description": "Pick a book off the shelf and explore the words that changed the way I think."
     },
     "contact": {
       "title": "Get in Touch",
@@ -105,6 +110,7 @@
       "video": "Video slot"
     },
     "nodes": {
+      "2026": "New Chapter",
       "2025": "Present Day",
       "2024": "Chasing Dreams",
       "2023": "Exploring Horizons",

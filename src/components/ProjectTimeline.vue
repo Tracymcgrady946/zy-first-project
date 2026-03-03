@@ -103,68 +103,13 @@
     </Transition>
   </div>
 
-  <!-- 灯箱预览（挂到 body，避免 overflow 裁剪） -->
-  <Teleport to="body">
-    <Transition name="lb-fade">
-      <div
-        v-if="previewIdx !== null"
-        class="pt-lightbox"
-        @click.self="closePreview"
-      >
-        <!-- 关闭按钮 -->
-        <button class="lb-close" @click="closePreview">✕</button>
-
-        <!-- 主内容 -->
-        <div class="lb-content">
-          <Transition name="lb-card" mode="out-in">
-            <div :key="previewIdx" class="lb-card-wrap">
-              <img
-                v-if="displayCards[previewIdx]?.type === 'image' && displayCards[previewIdx]?.src"
-                :src="displayCards[previewIdx].src"
-                :alt="displayCards[previewIdx].alt || ''"
-                class="lb-img"
-              />
-              <div
-                v-else
-                class="lb-placeholder"
-                :style="{ background: displayCards[previewIdx]?.gradient }"
-              >
-                <span class="lb-placeholder-label">{{ displayCards[previewIdx]?.label }}</span>
-              </div>
-            </div>
-          </Transition>
-        </div>
-
-        <!-- 左右切换 -->
-        <button
-          v-if="displayCards.length > 1"
-          class="lb-arrow lb-arrow--prev"
-          @click="previewStep(-1)"
-        >‹</button>
-        <button
-          v-if="displayCards.length > 1"
-          class="lb-arrow lb-arrow--next"
-          @click="previewStep(1)"
-        >›</button>
-
-        <!-- 分页点 -->
-        <div class="lb-dots" v-if="displayCards.length > 1">
-          <span
-            v-for="(_, i) in displayCards"
-            :key="i"
-            class="lb-dot"
-            :class="{ active: i === previewIdx }"
-            @click="previewIdx = i"
-          ></span>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
+  <MediaPreview :cards="displayCards" v-model="previewIdx" />
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
+import MediaPreview from './MediaPreview.vue'
 
 import imgPage1 from '@/assets/img/project/page1.jpg'
 import imgPage2 from '@/assets/img/project/page2.JPG'
@@ -235,19 +180,6 @@ const previewIdx = ref(null)
 
 function openPreview(idx) {
   previewIdx.value = idx
-}
-
-function closePreview() {
-  previewIdx.value = null
-}
-
-function previewStep(dir) {
-  const len = displayCards.value.length
-  previewIdx.value = (previewIdx.value + dir + len) % len
-}
-
-function onEscKey(e) {
-  if (e.key === 'Escape') closePreview()
 }
 
 // ── 3D 轮播状态 ──
@@ -345,11 +277,8 @@ function closePanel() {
   selectedIdx.value = null
 }
 
-onMounted(() => window.addEventListener('keydown', onEscKey))
-onBeforeUnmount(() => {
-  stopAutoRotate()
-  window.removeEventListener('keydown', onEscKey)
-})
+onMounted(() => {})
+onBeforeUnmount(stopAutoRotate)
 </script>
 
 <style scoped>
@@ -783,191 +712,6 @@ onBeforeUnmount(() => {
   font-size: 12px;
   margin: 0;
   letter-spacing: 0.05em;
-}
-
-/* ══════════════════════════════════════════
-   灯箱
-══════════════════════════════════════════ */
-.pt-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 关闭按钮 */
-.lb-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 16px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
-  z-index: 10;
-}
-
-.lb-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-/* 主内容区 */
-.lb-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: min(88vw, 640px);
-  max-height: 80vh;
-}
-
-.lb-card-wrap {
-  max-width: min(88vw, 640px);
-  max-height: 78vh;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lb-img {
-  max-width: min(88vw, 640px);
-  max-height: 78vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  border-radius: 18px;
-}
-
-.lb-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.lb-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 40%,
-    rgba(255, 255, 255, 0.06) 50%,
-    transparent 60%
-  );
-  background-size: 200% 100%;
-  animation: pt-shimmer 3s infinite;
-}
-
-.lb-placeholder-label {
-  font-size: 18px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.65);
-  letter-spacing: 0.08em;
-  position: relative;
-  z-index: 1;
-}
-
-/* 左右箭头 */
-.lb-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
-  line-height: 1;
-}
-
-.lb-arrow:hover {
-  background: rgba(41, 151, 255, 0.3);
-  border-color: rgba(41, 151, 255, 0.5);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.lb-arrow--prev { left: max(16px, 4vw); }
-.lb-arrow--next { right: max(16px, 4vw); }
-
-/* 分页点 */
-.lb-dots {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.lb-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.lb-dot.active {
-  background: #2997ff;
-  transform: scale(1.3);
-}
-
-/* 灯箱过渡 */
-.lb-fade-enter-active,
-.lb-fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.lb-fade-enter-from,
-.lb-fade-leave-to {
-  opacity: 0;
-}
-
-/* 卡片切换过渡 */
-.lb-card-enter-active,
-.lb-card-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.lb-card-enter-from {
-  opacity: 0;
-  transform: scale(0.94);
-}
-
-.lb-card-leave-to {
-  opacity: 0;
-  transform: scale(1.04);
 }
 
 /* ── 过渡动画 ── */

@@ -10,18 +10,17 @@
     <div class="ta-body">
       <!-- Left: Vertical Timeline -->
       <div class="ta-timeline">
-        <div
-          v-for="(node, idx) in timelineNodes"
+        <div v-for="(node, idx) in timelineNodes"
           :key="node.year"
           class="ta-node"
           :class="{ active: selectedIdx === idx }"
-          @click="selectNode(idx)"
-        >
+          @click="selectNode(idx)">
           <div class="node-track">
             <div class="node-dot">
               <span class="node-ripple"></span>
             </div>
-            <div class="node-line" v-if="idx < timelineNodes.length - 1"></div>
+            <div class="node-line"
+              v-if="idx < timelineNodes.length - 1"></div>
           </div>
           <div class="node-text">
             <span class="node-year">{{ node.year }}</span>
@@ -32,41 +31,40 @@
 
       <!-- Right: 3D Album Panel -->
       <Transition name="album-appear">
-        <div v-if="selectedNode" class="ta-album-panel">
+        <div v-if="selectedNode"
+          class="ta-album-panel">
           <!-- Album Header -->
           <div class="album-label">
             <span class="album-year-tag">{{ selectedNode.year }}</span>
             <span class="album-name">{{ selectedNode.title }}</span>
-            <button class="album-close-btn" @click="closeAlbum">✕</button>
+            <button class="album-close-btn"
+              @click="closeAlbum">✕</button>
           </div>
 
           <!-- 3D Carousel -->
-          <div
-            class="carousel-scene"
+          <div class="carousel-scene"
             ref="sceneRef"
             @pointerdown="onPointerDown"
             @pointermove="onPointerMove"
             @pointerup="onPointerUp"
-            @pointerleave="onPointerUp"
-          >
-            <div class="carousel-stage" :style="stageStyle">
-              <div
-                v-for="(card, i) in displayCards"
+            @pointerleave="onPointerUp">
+            <div class="carousel-stage"
+              :style="stageStyle">
+              <div v-for="(card, i) in displayCards"
                 :key="i"
                 class="carousel-card"
-                :style="cardStyle(i, displayCards.length)"
-              >
+                :data-card-idx="i"
+                :style="cardStyle(i, displayCards.length)">
                 <div class="card-inner">
                   <!-- ─── 视频卡片 ─── -->
                   <template v-if="card.type === 'video'">
-                    <video
-                      v-if="card.src"
+                    <video v-if="card.src"
                       :src="card.src"
                       :poster="card.poster || ''"
                       controls
-                      preload="none"
-                    ></video>
-                    <div v-else class="card-placeholder">
+                      preload="none"></video>
+                    <div v-else
+                      class="card-placeholder">
                       <div class="ph-icon">▶</div>
                       <p class="ph-label">{{ $t('timeline.placeholder.video') }}</p>
                       <p class="ph-hint">media[{{ i }}]</p>
@@ -75,43 +73,61 @@
 
                   <!-- ─── 图片卡片 ─── -->
                   <template v-else>
-                    <img v-if="card.src" :src="card.src" :alt="card.alt || ''" />
-                    <div v-else class="card-placeholder">
+                    <img v-if="card.src"
+                      :src="card.src"
+                      :alt="card.alt || ''" />
+                    <div v-else
+                      class="card-placeholder">
                       <div class="ph-icon ph-icon--img"></div>
                       <p class="ph-label">{{ $t('timeline.placeholder.image') }}</p>
                       <p class="ph-hint">media[{{ i }}]</p>
                     </div>
                   </template>
                 </div>
+                <!-- 悬停放大提示 -->
+                <div class="card-zoom-hint">⊕</div>
               </div>
             </div>
           </div>
 
           <!-- Navigation -->
           <div class="carousel-controls">
-            <button class="nav-btn" @click="rotateBy(-1)">‹</button>
+            <button class="nav-btn"
+              @click="rotateBy(-1)">‹</button>
             <span class="nav-hint">{{ $t('timeline.dragHint') }}</span>
-            <button class="nav-btn" @click="rotateBy(1)">›</button>
+            <button class="nav-btn"
+              @click="rotateBy(1)">›</button>
           </div>
         </div>
       </Transition>
 
       <!-- Empty Hint when nothing selected -->
       <Transition name="hint-fade">
-        <div v-if="!selectedNode" class="ta-empty-hint">
+        <div v-if="!selectedNode"
+          class="ta-empty-hint">
           <div class="hint-arrow">←</div>
           <p>{{ $t('timeline.emptyHint') }}</p>
         </div>
       </Transition>
     </div>
   </div>
+  <MediaPreview :cards="displayCards" v-model="previewIdx" />
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
+import MediaPreview from './MediaPreview.vue'
+import ph1 from '@/assets/img/project/page1.jpg'
+import ph2 from '@/assets/img/project/page2.JPG'
+import ph3 from '@/assets/img/project/page3.JPG'
+import ph4 from '@/assets/img/project/page4.JPG'
+import ph5 from '@/assets/img/project/page5.JPG'
+import ph6 from '@/assets/img/project/page6.JPG'
 
 const { t } = useI18n()
+
+const placeholderImages = [ph1, ph2, ph3, ph4, ph5, ph6]
 
 // ╔══════════════════════════════════════════════════════════════╗
 // ║  时间轴数据 — 在此处填入您的个人历史节点                        ║
@@ -121,6 +137,10 @@ const { t } = useI18n()
 // ║             poster: '/your/poster.jpg' }                     ║
 // ╚══════════════════════════════════════════════════════════════╝
 const nodeList = [
+  {
+    year: '2026',
+    media: []
+  },
   {
     year: '2025',
     media: [
@@ -152,10 +172,18 @@ const selectedIdx = ref(0)
 const rotationAngle = ref(0)
 const sceneRef = ref(null)
 
+const previewIdx = ref(null)
+
+function openPreview (idx) {
+  previewIdx.value = idx
+}
+
 let rafId = null
 let isDragging = false
+let hasDragged = false
 let pointerStartX = 0
 let angleOnDragStart = 0
+let pointerDownTarget = null
 
 const selectedNode = computed(() =>
   selectedIdx.value !== null ? timelineNodes.value[selectedIdx.value] : null
@@ -167,8 +195,8 @@ const displayCards = computed(() => {
   if (m && m.length) return m
   return Array.from({ length: PLACEHOLDER_COUNT }, (_, i) => ({
     type: 'image',
-    src: '',
-    alt: `slot-${i}`
+    src: placeholderImages[i % placeholderImages.length],
+    alt: `placeholder-${i}`
   }))
 })
 
@@ -176,7 +204,7 @@ const stageStyle = computed(() => ({
   transform: `rotateY(${rotationAngle.value}deg)`
 }))
 
-function cardStyle(i, count) {
+function cardStyle (i, count) {
   const angle = (360 / count) * i
   const r = Math.round((CARD_W / 2) / Math.tan(Math.PI / count))
   return {
@@ -184,7 +212,7 @@ function cardStyle(i, count) {
   }
 }
 
-function selectNode(idx) {
+function selectNode (idx) {
   if (selectedIdx.value === idx) {
     closeAlbum()
     return
@@ -194,12 +222,12 @@ function selectNode(idx) {
   startAutoRotate()
 }
 
-function closeAlbum() {
+function closeAlbum () {
   selectedIdx.value = null
   stopAutoRotate()
 }
 
-function rotateBy(dir) {
+function rotateBy (dir) {
   const count = displayCards.value.length
   if (!count) return
   stopAutoRotate()
@@ -207,10 +235,10 @@ function rotateBy(dir) {
   setTimeout(startAutoRotate, 2000)
 }
 
-function startAutoRotate() {
+function startAutoRotate () {
   stopAutoRotate()
   let last = null
-  function tick(ts) {
+  function tick (ts) {
     if (last !== null) {
       rotationAngle.value -= (ts - last) * 0.008
     }
@@ -220,30 +248,41 @@ function startAutoRotate() {
   rafId = requestAnimationFrame(tick)
 }
 
-function stopAutoRotate() {
+function stopAutoRotate () {
   if (rafId !== null) {
     cancelAnimationFrame(rafId)
     rafId = null
   }
 }
 
-function onPointerDown(e) {
+function onPointerDown (e) {
   isDragging = true
+  hasDragged = false
+  pointerDownTarget = e.target
   pointerStartX = e.clientX
   angleOnDragStart = rotationAngle.value
   stopAutoRotate()
   e.currentTarget.setPointerCapture(e.pointerId)
 }
 
-function onPointerMove(e) {
+function onPointerMove (e) {
   if (!isDragging) return
+  if (Math.abs(e.clientX - pointerStartX) > 5) hasDragged = true
   rotationAngle.value = angleOnDragStart + (e.clientX - pointerStartX) * 0.35
 }
 
-function onPointerUp() {
+function onPointerUp (e) {
   if (!isDragging) return
   isDragging = false
   startAutoRotate()
+  if (!hasDragged && e.type === 'pointerup' && pointerDownTarget) {
+    const cardEl = pointerDownTarget.closest('[data-card-idx]')
+    if (cardEl) {
+      const idx = parseInt(cardEl.dataset.cardIdx)
+      if (!isNaN(idx)) openPreview(idx)
+    }
+  }
+  pointerDownTarget = null
 }
 
 onMounted(startAutoRotate)
@@ -507,7 +546,7 @@ onBeforeUnmount(stopAutoRotate)
 /* Fade edges for depth effect */
 .carousel-scene::before,
 .carousel-scene::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -550,16 +589,12 @@ onBeforeUnmount(stopAutoRotate)
   backface-visibility: hidden;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
   transition: box-shadow 0.3s;
 }
 
 .carousel-card:hover {
-  box-shadow:
-    0 8px 36px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(41, 151, 255, 0.3);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(41, 151, 255, 0.3);
 }
 
 .card-inner {
@@ -599,7 +634,7 @@ onBeforeUnmount(stopAutoRotate)
 
 /* Subtle shimmer on placeholder */
 .card-placeholder::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -613,8 +648,12 @@ onBeforeUnmount(stopAutoRotate)
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 .ph-icon {
@@ -635,7 +674,7 @@ onBeforeUnmount(stopAutoRotate)
 }
 
 .ph-icon--img::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -658,7 +697,7 @@ onBeforeUnmount(stopAutoRotate)
 
 .ph-hint {
   font-size: 9px;
-  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-family: "SF Mono", "Fira Code", monospace;
   opacity: 0.3;
   margin: 0;
   color: #2997ff;
@@ -727,8 +766,13 @@ onBeforeUnmount(stopAutoRotate)
 }
 
 @keyframes hint-bounce {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-8px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-8px);
+  }
 }
 
 .ta-empty-hint p {
@@ -737,12 +781,35 @@ onBeforeUnmount(stopAutoRotate)
   letter-spacing: 0.05em;
 }
 
+/* ── Card zoom hint ── */
+.card-zoom-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 14px;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+
+.carousel-card:hover .card-zoom-hint {
+  opacity: 1;
+}
+
+.carousel-card {
+  cursor: pointer;
+}
+
 /* ── Transitions ── */
 .album-appear-enter-active,
 .album-appear-leave-active {
-  transition:
-    opacity 0.38s ease,
-    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .album-appear-enter-from {

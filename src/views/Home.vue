@@ -5,19 +5,38 @@
       <HeroSection :hero="hero"
         @photo-error="onHeroPhotoError" />
     </ScrollReveal>
-    <ScrollReveal v-for="section in sectionsBeforeDreamCar"
+
+    <!-- About (project experience) section -->
+    <ScrollReveal v-if="aboutSection">
+      <SectionBlock :section-id="aboutSection.id"
+        :title="aboutSection.title"
+        :description="aboutSection.description"
+        :theme="aboutSection.theme"
+        :tech-links="aboutSection.techLinks">
+        <ProjectTimeline />
+      </SectionBlock>
+    </ScrollReveal>
+
+    <!-- Reading / Bookshelf section -->
+    <ScrollReveal>
+      <BookshelfSection />
+    </ScrollReveal>
+
+    <!-- Remaining sections before DreamCar (weather, calendar) -->
+    <ScrollReveal v-for="section in sectionsMiddle"
       :key="section.id">
       <SectionBlock :section-id="section.id"
         :title="section.title"
         :description="section.description"
         :theme="section.theme"
         :tech-links="section.techLinks">
-        <ProjectTimeline v-if="section.id === 'about'" />
         <WeatherWidget v-if="section.id === 'weather'" />
         <CalendarWidget v-if="section.id === 'calendar'" />
       </SectionBlock>
     </ScrollReveal>
+
     <DreamCarSection />
+
     <ScrollReveal v-for="section in sectionsAfterDreamCar"
       :key="section.id">
       <SectionBlock :section-id="section.id"
@@ -41,6 +60,7 @@ import WeatherWidget from '@/components/WeatherWidget.vue'
 import CalendarWidget from '@/components/CalendarWidget.vue'
 import DreamCarSection from '@/components/DreamCarSection.vue'
 import ProjectTimeline from '@/components/ProjectTimeline.vue'
+import BookshelfSection from '@/components/BookshelfSection.vue'
 import { typewriterConfig, sectionConfig } from '@/config/profile.js'
 import heroPhoto from '@/assets/img/elon_musk_PNG43.jpg'
 
@@ -51,6 +71,7 @@ const photoUrl = ref(heroPhoto)
 const navItems = computed(() => [
   { label: t('nav.intro'), href: '#intro' },
   { label: t('nav.about'), href: '#about' },
+  { label: t('nav.reading'), href: '#reading' },
   { label: t('nav.weather'), href: '#weather' },
   { label: t('nav.calendar'), href: '#calendar' },
   { label: t('nav.dreamCar'), href: '#dream-car' },
@@ -84,8 +105,12 @@ const allSections = computed(() =>
   }))
 )
 
-const sectionsBeforeDreamCar = computed(() =>
-  allSections.value.filter(s => s.id !== 'contact')
+const aboutSection = computed(() =>
+  allSections.value.find(s => s.id === 'about') || null
+)
+
+const sectionsMiddle = computed(() =>
+  allSections.value.filter(s => !['about', 'contact'].includes(s.id))
 )
 
 const sectionsAfterDreamCar = computed(() =>
