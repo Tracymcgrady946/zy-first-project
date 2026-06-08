@@ -72,7 +72,7 @@ const skillsSection = computed(() => {
   return {
     id: 'skills',
     title: '我的 Skill',
-    description: '按表格罗列当前本机安装的 Codex skills，每次展开 10 条。',
+    description: '一个完整的 Skill 通常包含简短的描述、详细的执行指南、检查标准，甚至包含自动化脚本。',
     theme: 'skills'
   }
 })
@@ -134,7 +134,7 @@ async function loadData () {
   }
 }
 
-function resetPlainEntryScroll() {
+function resetPlainEntryScroll () {
   if (initialScrollFixed || window.location.hash) return
   initialScrollFixed = true
 
@@ -158,7 +158,7 @@ function resetPlainEntryScroll() {
   })
 }
 
-function normalizeNav(nav) {
+function normalizeNav (nav) {
   const filtered = nav.filter(item =>
     !REMOVED_SECTION_IDS.some(id => item.href === `#${id}`)
   )
@@ -177,7 +177,7 @@ function normalizeNav(nav) {
   ]
 }
 
-function normalizeSections(secs) {
+function normalizeSections (secs) {
   const filtered = secs.filter(section => !REMOVED_SECTION_IDS.includes(section.id))
   if (filtered.some(section => section.id === 'skills')) return filtered
 
