@@ -1,5 +1,6 @@
 <template>
-  <section id="contact" class="ai-dynamics">
+  <section id="contact"
+    class="ai-dynamics">
     <div class="ai-dynamics-inner">
       <h2 class="ai-dynamics-title">AI 动态</h2>
       <p class="ai-dynamics-desc">聚合最新 AI 头条、知乎热议与 GitHub 爆火项目，随时掌握前沿脉搏。</p>
@@ -13,8 +14,13 @@
             <span class="ai-col-badge">最新</span>
           </div>
           <ul class="ai-list">
-            <li v-for="(item, i) in newsList" :key="i" class="ai-item ai-item--news">
-              <a :href="item.url" target="_blank" rel="noopener noreferrer" class="ai-item-link">
+            <li v-for="(item, i) in newsList"
+              :key="i"
+              class="ai-item ai-item--news">
+              <a :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ai-item-link">
                 <span class="ai-item-index">{{ i + 1 }}</span>
                 <div class="ai-item-content">
                   <p class="ai-item-title">{{ item.title }}</p>
@@ -38,15 +44,25 @@
             <span class="ai-col-badge ai-col-badge--zhihu">热门</span>
           </div>
           <ul class="ai-list">
-            <li v-for="(item, i) in zhihuList" :key="i" class="ai-item ai-item--zhihu">
-              <a :href="item.url" target="_blank" rel="noopener noreferrer" class="ai-item-link">
+            <li v-for="(item, i) in zhihuList"
+              :key="i"
+              class="ai-item ai-item--zhihu">
+              <a :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ai-item-link">
                 <span class="ai-item-index">{{ i + 1 }}</span>
                 <div class="ai-item-content">
                   <p class="ai-item-title">{{ item.title }}</p>
                   <div class="ai-item-meta">
-                    <span class="ai-item-votes">{{ item.votes }} 关注</span>
-                    <span class="ai-item-dot">·</span>
-                    <span class="ai-item-answers">{{ item.answers }} 回答</span>
+                    <template v-if="item.meta">
+                      <span class="ai-item-votes">{{ item.meta }}</span>
+                    </template>
+                    <template v-else>
+                      <span class="ai-item-votes">{{ item.votes }} 关注</span>
+                      <span class="ai-item-dot">·</span>
+                      <span class="ai-item-answers">{{ item.answers }} 回答</span>
+                    </template>
                   </div>
                 </div>
                 <span class="ai-item-arrow">→</span>
@@ -63,14 +79,20 @@
             <span class="ai-col-badge ai-col-badge--github">Trending</span>
           </div>
           <ul class="ai-list">
-            <li v-for="(item, i) in githubList" :key="i" class="ai-item ai-item--github">
-              <a :href="item.url" target="_blank" rel="noopener noreferrer" class="ai-item-link">
+            <li v-for="(item, i) in githubList"
+              :key="i"
+              class="ai-item ai-item--github">
+              <a :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ai-item-link">
                 <span class="ai-item-index">{{ i + 1 }}</span>
                 <div class="ai-item-content">
                   <p class="ai-item-title ai-item-repo">{{ item.repo }}</p>
                   <p class="ai-item-desc">{{ item.desc }}</p>
                   <div class="ai-item-meta">
-                    <span class="ai-item-lang" :style="{ background: item.langColor }"></span>
+                    <span class="ai-item-lang"
+                      :style="{ background: item.langColor }"></span>
                     <span class="ai-item-source">{{ item.lang }}</span>
                     <span class="ai-item-dot">·</span>
                     <span class="ai-item-stars">⭐ {{ item.stars }}</span>
@@ -87,114 +109,25 @@
 </template>
 
 <script setup>
-const newsList = [
-  {
-    title: 'OpenAI 正式发布 GPT-4.5，推理能力与长上下文全面升级',
-    source: 'OpenAI Blog',
-    time: '2 小时前',
-    url: 'https://openai.com/blog'
-  },
-  {
-    title: 'Google DeepMind Gemini 2.0 Flash 实验版开放，实时多模态交互成真',
-    source: '36氪',
-    time: '5 小时前',
-    url: 'https://36kr.com'
-  },
-  {
-    title: 'Anthropic Claude 3.7 Sonnet 发布，编程能力跻身行业第一',
-    source: 'Anthropic',
-    time: '1 天前',
-    url: 'https://www.anthropic.com/news'
-  },
-  {
-    title: 'Meta 开源 Llama 4，支持百万 token 超长上下文理解',
-    source: 'InfoQ',
-    time: '2 天前',
-    url: 'https://www.infoq.cn'
-  },
-  {
-    title: '微软 Copilot Studio 重磅升级，Agent 自动化流程全面提速',
-    source: 'Microsoft Blog',
-    time: '3 天前',
-    url: 'https://blogs.microsoft.com'
-  }
-]
+import { ref, onMounted } from 'vue'
+import { api } from '@/api/index.js'
 
-const zhihuList = [
-  {
-    title: '2026 年 AI 前端工程师需要掌握哪些核心技能？',
-    votes: '3.2k',
-    answers: '218',
-    url: 'https://www.zhihu.com/search?q=AI%E5%89%8D%E7%AB%AF'
-  },
-  {
-    title: '如何看待 AI 替代程序员这件事——焦虑还是机会？',
-    votes: '8.7k',
-    answers: '562',
-    url: 'https://www.zhihu.com/search?q=AI%E6%9B%BF%E4%BB%A3%E7%A8%8B%E5%BA%8F%E5%91%98'
-  },
-  {
-    title: '用了一年 Cursor 之后，我的真实开发效率提升了多少？',
-    votes: '5.1k',
-    answers: '341',
-    url: 'https://www.zhihu.com/search?q=Cursor+AI'
-  },
-  {
-    title: '大模型的"幻觉"问题为什么这么难从根本上解决？',
-    votes: '12k',
-    answers: '893',
-    url: 'https://www.zhihu.com/search?q=%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89'
-  },
-  {
-    title: '普通人如何利用 AI 实现可持续的副业收入？',
-    votes: '21k',
-    answers: '1.4k',
-    url: 'https://www.zhihu.com/search?q=AI+%E5%89%AF%E4%B8%9A'
-  }
-]
+const newsList = ref([])
+const zhihuList = ref([])
+const githubList = ref([])
 
-const githubList = [
-  {
-    repo: 'deepseek-ai / DeepSeek-V3',
-    desc: '开源 MoE 大模型，671B 参数，综合性能超越闭源模型',
-    lang: 'Python',
-    langColor: '#3572A5',
-    stars: '98.2k',
-    url: 'https://github.com/deepseek-ai/DeepSeek-V3'
-  },
-  {
-    repo: 'lobehub / lobe-chat',
-    desc: '现代化 AI 聊天框架，支持多模型、插件与私有部署',
-    lang: 'TypeScript',
-    langColor: '#3178c6',
-    stars: '54.1k',
-    url: 'https://github.com/lobehub/lobe-chat'
-  },
-  {
-    repo: 'microsoft / autogen',
-    desc: '多智能体对话框架，构建自主 AI 协作工作流',
-    lang: 'Python',
-    langColor: '#3572A5',
-    stars: '43.8k',
-    url: 'https://github.com/microsoft/autogen'
-  },
-  {
-    repo: 'vercel / ai',
-    desc: 'Vercel AI SDK，轻松为 Next.js 应用接入大模型能力',
-    lang: 'TypeScript',
-    langColor: '#3178c6',
-    stars: '16.3k',
-    url: 'https://github.com/vercel/ai'
-  },
-  {
-    repo: 'browser-use / browser-use',
-    desc: '让 AI Agent 像人一样操作浏览器，自动化 Web 任务',
-    lang: 'Python',
-    langColor: '#3572A5',
-    stars: '31.5k',
-    url: 'https://github.com/browser-use/browser-use'
+async function loadAiDynamics () {
+  try {
+    const data = await api.getAiDynamics()
+    newsList.value = data.newsList || []
+    zhihuList.value = data.zhihuList || []
+    githubList.value = data.githubList || []
+  } catch (e) {
+    console.error('Failed to load AI dynamics:', e)
   }
-]
+}
+
+onMounted(loadAiDynamics)
 </script>
 
 <style scoped>
@@ -203,7 +136,7 @@ const githubList = [
   padding: 72px 24px 96px;
   padding-left: calc(24px + env(safe-area-inset-left));
   padding-right: calc(24px + env(safe-area-inset-right));
-  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  padding-bottom: calc(26px + env(safe-area-inset-bottom));
   width: 100%;
   box-sizing: border-box;
 }
@@ -361,9 +294,18 @@ const githubList = [
   margin-top: 1px;
 }
 
-.ai-item--news .ai-item-index { background: rgba(41, 151, 255, 0.12); color: #2997ff; }
-.ai-item--zhihu .ai-item-index { background: rgba(79, 172, 254, 0.12); color: #4facfe; }
-.ai-item--github .ai-item-index { background: rgba(110, 231, 183, 0.12); color: #6ee7b7; }
+.ai-item--news .ai-item-index {
+  background: rgba(41, 151, 255, 0.12);
+  color: #2997ff;
+}
+.ai-item--zhihu .ai-item-index {
+  background: rgba(79, 172, 254, 0.12);
+  color: #4facfe;
+}
+.ai-item--github .ai-item-index {
+  background: rgba(110, 231, 183, 0.12);
+  color: #6ee7b7;
+}
 
 .ai-item-content {
   flex: 1;

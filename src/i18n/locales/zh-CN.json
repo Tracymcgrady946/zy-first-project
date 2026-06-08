@@ -3,23 +3,15 @@
     "intro": "介绍",
     "about": "项目经历",
     "reading": "阅读",
-    "weather": "天气",
-    "calendar": "日历",
-    "dreamCar": "梦想座驾",
+    "skills": "Skill",
     "contact": "AI 动态"
-  },
-  "dreamCar": {
-    "sub": "Dream Car",
-    "title": "小米 YU 7",
-    "desc": "智能驾驶与极致设计的融合，这是属于未来的座驾。"
   },
   "hero": {
     "name": "张岳",
     "role": "前端工程师 · 个人介绍",
     "introLines": [
-      "你好，我是张岳。",
-      "一名用 Vue 把想法做成产品的前端工程师。",
-      "广阔天地、大有作为。"
+      "一名前端工程师，也是一名持续用 AI 重塑工作方式的实践者。",
+      "我关注产品体验、工程效率，也相信技术最终要服务于真实生活。"
     ],
     "infoGender":   { "label": "性别",     "value": "男" },
     "infoHobbies":  { "label": "爱好",     "value": "篮球 · 滑雪" },
@@ -32,17 +24,13 @@
       "title": "项目经历",
       "description": "在以往项目中获得的经验以及思考"
     },
-    "weather": {
-      "title": "未来 15 天天气",
-      "description": "实时获取当地天气预报，掌握两周内的气象变化。"
-    },
-    "calendar": {
-      "title": "日历",
-      "description": "浏览月份日历，随时查看日期安排。"
-    },
     "reading": {
       "title": "阅读",
       "description": "在书架上取下一本，翻开那些改变过我思考方式的文字。"
+    },
+    "skills": {
+      "title": "我的 Skill",
+      "description": "按表格罗列当前本机安装的 Codex skills，每次展开 10 条。"
     },
     "contact": {
       "title": "AI 动态",
@@ -119,35 +107,8 @@
       "2020": "新的起点"
     }
   },
-  "calendar": {
-    "weekdays": ["日", "一", "二", "三", "四", "五", "六"],
-    "today": "今天",
-    "backToToday": "回到今天"
-  },
-  "weather": {
-    "loading": "正在获取天气数据…",
-    "retry": "重试",
-    "locating": "定位中…",
-    "myLocation": "📡 我的位置",
-    "today": "今天",
-    "noGeo": "浏览器不支持定位",
-    "geoFail": "定位失败，已显示默认城市天气",
-    "unavailable": "天气服务暂时不可用",
-    "fetchFail": "获取天气失败，请稍后重试",
-    "currentLocation": "当前位置",
-    "defaultCity": "上海",
-    "desc": {
-      "clear": "晴",
-      "partlyCloudy": "少云",
-      "overcast": "阴",
-      "fog": "雾",
-      "drizzle": "毛毛雨",
-      "rain": "雨",
-      "freezingRain": "冻雨",
-      "snow": "雪",
-      "showers": "阵雨",
-      "snowShowers": "阵雪",
-      "thunderstorm": "雷暴"
-    }
+  "skills": {
+    "source": "来源：~/.codex/skills",
+    "showMore": "继续展开 10 条"
   }
 }

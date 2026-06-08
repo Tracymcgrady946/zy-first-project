@@ -118,55 +118,35 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useLocale } from '@/composables/useLocale.js'
+import { api } from '@/api/index.js'
 import MediaPreview from './MediaPreview.vue'
-import ph1 from '@/assets/img/profile/page1.png'
-import ph2 from '@/assets/img/profile/page2.png'
-import ph3 from '@/assets/img/profile/page3.png'
-import ph4 from '@/assets/img/profile/page4.png'
-import ph5 from '@/assets/img/profile/page5.png'
-import ph6 from '@/assets/img/profile/page6.png'
 
 const { t } = useI18n()
+const { locale } = useLocale()
 
-const placeholderImages = [ph1, ph2, ph3, ph4, ph5, ph6]
-
-// ╔══════════════════════════════════════════════════════════════╗
-// ║  时间轴数据 — 在此处填入您的个人历史节点                        ║
-// ║  media 数组格式：                                             ║
-// ║    图片: { type: 'image', src: '/your/img.jpg', alt: '描述' } ║
-// ║    视频: { type: 'video', src: '/your/video.mp4',            ║
-// ║             poster: '/your/poster.jpg' }                     ║
-// ╚══════════════════════════════════════════════════════════════╝
-const nodeList = [
-  {
-    year: '2026',
-    media: []
-  },
-  {
-    year: '2025',
-    media: [
-      // { type: 'image', src: '/images/2025/photo1.jpg', alt: '2025 精彩瞬间' },
-      // { type: 'video', src: '/videos/2025/clip.mp4', poster: '/images/2025/poster.jpg' },
-    ]
-  },
-  {
-    year: '2024',
-    media: [
-      // { type: 'image', src: '/images/2024/photo1.jpg', alt: '2024 精彩瞬间' },
-    ]
-  },
-  { year: '2023', media: [] },
-  { year: '2022', media: [] },
-  { year: '2021', media: [] },
-  { year: '2020', media: [] }
+const placeholderImages = [
+  '/uploads/profile/page1.png',
+  '/uploads/profile/page2.png',
+  '/uploads/profile/page3.png',
+  '/uploads/profile/page4.png',
+  '/uploads/profile/page5.png',
+  '/uploads/profile/page6.png',
 ]
 
-// 节点标题跟随语言动态更新
-const timelineNodes = computed(() =>
-  nodeList.map(n => ({ ...n, title: t(`timeline.nodes.${n.year}`) }))
-)
+const timelineNodes = ref([])
+
+async function loadTimeline() {
+  try {
+    timelineNodes.value = await api.getTimeline(locale.value)
+  } catch (e) {
+    console.error('Failed to load timeline:', e)
+  }
+}
+
+watch(locale, loadTimeline)
 
 const PLACEHOLDER_COUNT = 5
 const CARD_W = 130
@@ -288,7 +268,10 @@ function onPointerUp (e) {
   pointerDownTarget = null
 }
 
-onMounted(startAutoRotate)
+onMounted(async () => {
+  await loadTimeline()
+  startAutoRotate()
+})
 onBeforeUnmount(stopAutoRotate)
 </script>
 

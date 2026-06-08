@@ -1,18 +1,20 @@
 <template>
   <nav class="apple-nav">
     <!-- 桌面端：正常展示所有链接 -->
-    <a
-      v-for="item in items"
+    <a v-for="item in items"
       :key="item.href"
       :href="item.href"
-      class="nav-link"
-    >{{ item.label }}</a>
-    <button class="lang-toggle" @click="toggleLocale">
+      class="nav-link">{{ item.label }}</a>
+    <button class="lang-toggle"
+      @click="toggleLocale">
       {{ locale === 'zh-CN' ? 'EN' : '中' }}
     </button>
 
     <!-- 移动端：右侧汉堡按钮 -->
-    <button class="hamburger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="菜单">
+    <button class="hamburger"
+      :class="{ open: menuOpen }"
+      @click="menuOpen = !menuOpen"
+      aria-label="菜单">
       <span></span>
       <span></span>
       <span></span>
@@ -21,20 +23,21 @@
 
   <!-- 移动端下拉菜单 -->
   <Transition name="slide-down">
-    <div v-if="menuOpen" class="mobile-menu">
-      <a
-        v-for="item in items"
+    <div v-if="menuOpen"
+      class="mobile-menu">
+      <a v-for="item in items"
         :key="item.href"
         :href="item.href"
         class="mobile-menu-link"
-        @click.prevent="onMobileNavClick(item.href)"
-      >{{ item.label }}</a>
+        @click.prevent="onMobileNavClick(item.href)">{{ item.label }}</a>
     </div>
   </Transition>
 
   <!-- 遮罩层 -->
   <Transition name="fade">
-    <div v-if="menuOpen" class="mobile-overlay" @click="menuOpen = false"></div>
+    <div v-if="menuOpen"
+      class="mobile-overlay"
+      @click="menuOpen = false"></div>
   </Transition>
 </template>
 
@@ -52,7 +55,7 @@ defineProps({
 const { locale, toggleLocale } = useLocale()
 const menuOpen = ref(false)
 
-function onMobileNavClick(href) {
+function onMobileNavClick (href) {
   menuOpen.value = false
   const id = href.replace('#', '')
   setTimeout(() => {
@@ -261,6 +264,9 @@ function onMobileNavClick(href) {
 }
 
 @media (min-width: 601px) {
-  .apple-nav a { padding: 8px 10px; min-width: auto; }
+  .apple-nav a {
+    padding: 8px 10px;
+    min-width: auto;
+  }
 }
 </style>

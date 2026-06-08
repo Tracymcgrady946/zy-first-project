@@ -17,7 +17,7 @@ export const techLinks = [
 
 export const sectionConfig = [
   { id: 'about', theme: 'about' },
-  { id: 'weather', theme: 'weather' },
-  { id: 'calendar', theme: 'calendar' },
+  { id: 'reading', theme: null },
+  { id: 'skills', theme: 'skills' },
   { id: 'contact', theme: 'contact' }
 ]

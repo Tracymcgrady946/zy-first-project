@@ -2,7 +2,8 @@
   <div class="page-home">
     <AppNav :items="navItems" />
     <ScrollReveal :skip="true">
-      <HeroSection :hero="hero"
+      <HeroSection v-if="hero"
+        :hero="hero"
         @photo-error="onHeroPhotoError" />
     </ScrollReveal>
 
@@ -11,106 +12,192 @@
       <SectionBlock :section-id="aboutSection.id"
         :title="aboutSection.title"
         :description="aboutSection.description"
-        :theme="aboutSection.theme"
-        :tech-links="aboutSection.techLinks">
+        :theme="aboutSection.theme">
         <ProjectTimeline />
       </SectionBlock>
     </ScrollReveal>
 
     <!-- Reading / Bookshelf section -->
     <ScrollReveal>
-      <BookshelfSection />
+      <BookshelfSection :section="readingSection" />
     </ScrollReveal>
 
-    <!-- Remaining sections before DreamCar (weather, calendar) -->
+    <!-- Remaining standalone sections -->
     <ScrollReveal v-for="section in sectionsMiddle"
       :key="section.id">
       <SectionBlock :section-id="section.id"
         :title="section.title"
         :description="section.description"
-        :theme="section.theme"
-        :tech-links="section.techLinks">
-        <WeatherWidget v-if="section.id === 'weather'" />
-        <CalendarWidget v-if="section.id === 'calendar'" />
+        :theme="section.theme">
+        <SkillsTable v-if="section.id === 'skills'" />
       </SectionBlock>
     </ScrollReveal>
 
-    <DreamCarSection />
+    <ScrollReveal>
+      <AiDynamics :section="contactSection" />
+    </ScrollReveal>
 
     <ScrollReveal>
-      <AiDynamics />
+      <QuotesSection />
     </ScrollReveal>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { useLocale } from '@/composables/useLocale.js'
+import { api } from '@/api/index.js'
 import AppNav from '@/components/AppNav.vue'
 import HeroSection from '@/components/HeroSection.vue'
 import SectionBlock from '@/components/SectionBlock.vue'
 import ScrollReveal from '@/components/ScrollReveal.vue'
-import WeatherWidget from '@/components/WeatherWidget.vue'
-import CalendarWidget from '@/components/CalendarWidget.vue'
-import DreamCarSection from '@/components/DreamCarSection.vue'
+import SkillsTable from '@/components/SkillsTable.vue'
 import ProjectTimeline from '@/components/ProjectTimeline.vue'
 import BookshelfSection from '@/components/BookshelfSection.vue'
 import AiDynamics from '@/components/AiDynamics.vue'
-import { typewriterConfig, sectionConfig } from '@/config/profile.js'
-import heroPhoto from '@/assets/img/elon_musk_PNG43.jpg'
+import QuotesSection from '@/components/QuotesSection.vue'
 
-const { t, tm } = useI18n()
+const { locale } = useLocale()
+const REMOVED_SECTION_IDS = ['weather', 'calendar', 'dream-car']
+const skillsSection = computed(() => {
+  if (locale.value === 'en-US') {
+    return {
+      id: 'skills',
+      title: 'My Skills',
+      description: 'A local inventory of Codex skills installed on this machine.',
+      theme: 'skills'
+    }
+  }
 
-const photoUrl = ref(heroPhoto)
+  return {
+    id: 'skills',
+    title: '我的 Skill',
+    description: '按表格罗列当前本机安装的 Codex skills，每次展开 10 条。',
+    theme: 'skills'
+  }
+})
 
-const navItems = computed(() => [
-  { label: t('nav.intro'), href: '#intro' },
-  { label: t('nav.about'), href: '#about' },
-  { label: t('nav.reading'), href: '#reading' },
-  { label: t('nav.weather'), href: '#weather' },
-  { label: t('nav.calendar'), href: '#calendar' },
-  { label: t('nav.dreamCar'), href: '#dream-car' },
-  { label: t('nav.contact'), href: '#contact' }
-])
+const profileData = ref(null)
+const navItems = ref([])
+const sections = ref([])
+const siteConfig = ref({})
+let initialScrollFixed = false
 
-const hero = computed(() => ({
-  name: t('hero.name'),
-  role: t('hero.role'),
-  introLines: tm('hero.introLines'),
-  infoList: [
-    { icon: '♂',  label: t('hero.infoGender.label'),    value: t('hero.infoGender.value') },
-    { icon: '✦',  label: t('hero.infoHobbies.label'),   value: t('hero.infoHobbies.value') },
-    { icon: '◎',  label: t('hero.infoLocation.label'),  value: t('hero.infoLocation.value') },
-    { icon: '✈',  label: t('hero.infoFavCities.label'), value: t('hero.infoFavCities.value') },
-    { icon: '◈',  label: t('hero.infoGoals.label'),     value: t('hero.infoGoals.value') },
-    { icon: '@',  label: 'Email', value: 'xx@gmail.com', href: 'mailto:xx@gmail.com' }
-  ],
-  photoUrl: photoUrl.value,
-  photoAlt: t('hero.name'),
-  typewriterSpeed: typewriterConfig.speed,
-  typewriterStartAfter: typewriterConfig.startAfter,
-  showCursor: typewriterConfig.showCursor
-}))
-
-const allSections = computed(() =>
-  sectionConfig.map(cfg => ({
-    ...cfg,
-    title: t(`section.${cfg.id}.title`),
-    description: t(`section.${cfg.id}.description`)
-  }))
-)
+const hero = computed(() => {
+  if (!profileData.value) return null
+  const p = profileData.value
+  return {
+    name: p.name,
+    role: p.role,
+    introLines: p.introLines,
+    infoList: p.infoList,
+    photoUrl: p.photo_url,
+    photoAlt: p.name,
+    typewriterSpeed: Number(siteConfig.value.typewriter_speed) || 100,
+    typewriterStartAfter: Number(siteConfig.value.typewriter_start_after) || 800,
+    showCursor: siteConfig.value.typewriter_show_cursor === 'true',
+  }
+})
 
 const aboutSection = computed(() =>
-  allSections.value.find(s => s.id === 'about') || null
+  sections.value.find(s => s.id === 'about') || null
+)
+
+const readingSection = computed(() =>
+  sections.value.find(s => s.id === 'reading') || null
 )
 
 const sectionsMiddle = computed(() =>
-  allSections.value.filter(s => !['about', 'contact'].includes(s.id))
+  sections.value.filter(s => !['about', 'contact', 'reading'].includes(s.id))
 )
 
-function onHeroPhotoError () {
-  photoUrl.value = '/avatar.svg'
+const contactSection = computed(() =>
+  sections.value.find(s => s.id === 'contact') || null
+)
+
+async function loadData () {
+  try {
+    const [profile, nav, secs, config] = await Promise.all([
+      api.getProfile(locale.value),
+      api.getNav(locale.value),
+      api.getSections(locale.value),
+      api.getConfig(),
+    ])
+    profileData.value = profile
+    navItems.value = normalizeNav(nav)
+    sections.value = normalizeSections(secs)
+    siteConfig.value = config
+    await nextTick()
+    resetPlainEntryScroll()
+  } catch (e) {
+    console.error('Failed to load page data:', e)
+  }
 }
+
+function resetPlainEntryScroll() {
+  if (initialScrollFixed || window.location.hash) return
+  initialScrollFixed = true
+
+  const root = document.documentElement
+  const previousScrollBehavior = root.style.scrollBehavior
+
+  const reset = () => {
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    root.scrollTop = 0
+    document.body.scrollTop = 0
+  }
+
+  reset()
+  requestAnimationFrame(() => {
+    reset()
+    setTimeout(reset, 120)
+    setTimeout(() => {
+      root.style.scrollBehavior = previousScrollBehavior
+    }, 180)
+  })
+}
+
+function normalizeNav(nav) {
+  const filtered = nav.filter(item =>
+    !REMOVED_SECTION_IDS.some(id => item.href === `#${id}`)
+  )
+  if (filtered.some(item => item.href === '#skills')) return filtered
+
+  const skillItem = {
+    label: locale.value === 'en-US' ? 'Skills' : 'Skill',
+    href: '#skills'
+  }
+  const readingIndex = filtered.findIndex(item => item.href === '#reading')
+  const insertIndex = readingIndex >= 0 ? readingIndex + 1 : filtered.length
+  return [
+    ...filtered.slice(0, insertIndex),
+    skillItem,
+    ...filtered.slice(insertIndex)
+  ]
+}
+
+function normalizeSections(secs) {
+  const filtered = secs.filter(section => !REMOVED_SECTION_IDS.includes(section.id))
+  if (filtered.some(section => section.id === 'skills')) return filtered
+
+  const readingIndex = filtered.findIndex(section => section.id === 'reading')
+  const insertIndex = readingIndex >= 0 ? readingIndex + 1 : filtered.length
+  return [
+    ...filtered.slice(0, insertIndex),
+    skillsSection.value,
+    ...filtered.slice(insertIndex)
+  ]
+}
+
+function onHeroPhotoError () {
+  if (profileData.value) {
+    profileData.value = { ...profileData.value, photo_url: '/avatar.svg' }
+  }
+}
+
+watch(locale, loadData)
+onMounted(loadData)
 </script>
 
 <style scoped>

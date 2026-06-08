@@ -3,23 +3,15 @@
     "intro": "Intro",
     "about": "Projects",
     "reading": "Reading",
-    "weather": "Weather",
-    "calendar": "Calendar",
-    "dreamCar": "Dream Car",
+    "skills": "Skills",
     "contact": "AI Pulse"
-  },
-  "dreamCar": {
-    "sub": "Dream Car",
-    "title": "Xiaomi YU 7",
-    "desc": "Where intelligent driving meets exceptional design — a car built for the future."
   },
   "hero": {
     "name": "Zhang Yue",
     "role": "Front-End Engineer · Personal Page",
     "introLines": [
-      "Hi, I'm Zhang Yue.",
-      "A front-end engineer who turns ideas into products with Vue.",
-      "The world is vast — make your mark."
+      "A front-end engineer and a practitioner reshaping my workflow with AI.",
+      "I care about product experience, engineering efficiency, and technology that serves real life."
     ],
     "infoGender":   { "label": "Gender",      "value": "Male" },
     "infoHobbies":  { "label": "Hobbies",     "value": "Basketball · Skiing" },
@@ -32,17 +24,13 @@
       "title": "Project Experience",
       "description": "Experience and reflections gained from previous projects."
     },
-    "weather": {
-      "title": "15-Day Forecast",
-      "description": "Live local weather forecast to help you plan the next two weeks."
-    },
-    "calendar": {
-      "title": "Calendar",
-      "description": "Browse the monthly calendar and keep track of your dates."
-    },
     "reading": {
       "title": "Reading",
       "description": "Pick a book off the shelf and explore the words that changed the way I think."
+    },
+    "skills": {
+      "title": "My Skills",
+      "description": "A local inventory of Codex skills installed on this machine."
     },
     "contact": {
       "title": "AI Pulse",
@@ -119,35 +107,8 @@
       "2020": "New Beginnings"
     }
   },
-  "calendar": {
-    "weekdays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    "today": "Today",
-    "backToToday": "Back to Today"
-  },
-  "weather": {
-    "loading": "Loading weather data…",
-    "retry": "Retry",
-    "locating": "Locating…",
-    "myLocation": "📡 My Location",
-    "today": "Today",
-    "noGeo": "Geolocation is not supported",
-    "geoFail": "Location failed, showing default city",
-    "unavailable": "Weather service unavailable",
-    "fetchFail": "Failed to fetch weather, please try again",
-    "currentLocation": "Current Location",
-    "defaultCity": "Shanghai",
-    "desc": {
-      "clear": "Clear",
-      "partlyCloudy": "Partly Cloudy",
-      "overcast": "Overcast",
-      "fog": "Fog",
-      "drizzle": "Drizzle",
-      "rain": "Rain",
-      "freezingRain": "Freezing Rain",
-      "snow": "Snow",
-      "showers": "Showers",
-      "snowShowers": "Snow Showers",
-      "thunderstorm": "Thunderstorm"
-    }
+  "skills": {
+    "source": "Source: ~/.codex/skills",
+    "showMore": "Show 10 more"
   }
 }

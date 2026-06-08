@@ -109,18 +109,13 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useLocale } from '@/composables/useLocale.js'
+import { api } from '@/api/index.js'
 import MediaPreview from './MediaPreview.vue'
 
-import imgPage1 from '@/assets/img/project/page1.jpg'
-import imgPage2 from '@/assets/img/project/page2.JPG'
-import imgPage3 from '@/assets/img/project/page3.JPG'
-import imgPage4 from '@/assets/img/project/page4.JPG'
-import imgPage5 from '@/assets/img/project/page5.JPG'
-import imgPage6 from '@/assets/img/project/page6.JPG'
+const { t } = useI18n()
+const { locale } = useLocale()
 
-const { t, tm } = useI18n()
-
-// ── 卡片占位渐变色，顺序与 projectKeys 一一对应 ──
 const CARD_GRADIENTS = [
   'linear-gradient(135deg, #0a2342 0%, #0e4bba 50%, #2997ff 100%)',
   'linear-gradient(135deg, #1a0533 0%, #6b21a8 55%, #c026d3 100%)',
@@ -131,39 +126,26 @@ const CARD_GRADIENTS = [
 const CARD_W = 110
 const CARD_H = 148
 
-// 静态结构，文案从 i18n 读取
-const projectKeys = ['huoliGo', 'fourHigh', 'fuwaiWeight', 'summaryHighlights']
-const mediaMap = {
-  huoliGo: [
-    { type: 'image', src: imgPage1, alt: '活力Go - 页面1' },
-    { type: 'image', src: imgPage2, alt: '活力Go - 页面2' }
-  ],
-  fourHigh: [
-    { type: 'image', src: imgPage3, alt: '四高一重 - 页面1' },
-    { type: 'image', src: imgPage4, alt: '四高一重 - 页面2' }
-  ],
-  fuwaiWeight: [
-    { type: 'image', src: imgPage5, alt: '阜外减重 - 页面1' },
-    { type: 'image', src: imgPage6, alt: '阜外减重 - 页面2' }
-  ],
-  summaryHighlights: []
+const projects = ref([])
+
+async function loadProjects() {
+  try {
+    projects.value = await api.getProjects(locale.value)
+    if (projects.value.length && selectedIdx.value === null) {
+      selectedIdx.value = 0
+    }
+  } catch (e) {
+    console.error('Failed to load projects:', e)
+  }
 }
 
-const projects = computed(() =>
-  projectKeys.map(key => ({
-    key,
-    name: t(`project.${key}.name`),
-    media: mediaMap[key],
-    techs: tm(`project.${key}.techs`),
-    thought: t(`project.${key}.thought`)
-  }))
+watch(locale, loadProjects)
+
+const selectedIdx = ref(null)
+const selectedProject = computed(() =>
+  selectedIdx.value !== null ? projects.value[selectedIdx.value] : null
 )
 
-// ── 选中状态（默认选中第一个）──
-const selectedIdx = ref(0)
-const selectedProject = computed(() => projects.value[selectedIdx.value] ?? null)
-
-// ── 轮播卡片数据：有 media 用 media，否则每张卡对应一个项目渐变占位 ──
 const displayCards = computed(() => {
   if (!selectedProject.value) return []
   const m = selectedProject.value.media
@@ -277,7 +259,7 @@ function closePanel() {
   selectedIdx.value = null
 }
 
-onMounted(() => {})
+onMounted(loadProjects)
 onBeforeUnmount(stopAutoRotate)
 </script>
 
