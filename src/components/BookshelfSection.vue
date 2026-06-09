@@ -55,7 +55,9 @@
       </div>
 
       <!-- ─── Right: Book detail panel ─── -->
-      <div class="bs-detail-area" :style="detailStyle">
+      <div class="bs-detail-area"
+        ref="detailRef"
+        :style="detailStyle">
         <Transition name="bs-slide"
           mode="out-in">
           <div v-if="activeBook"
@@ -109,7 +111,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { api } from '@/api/index.js'
 
 const books = ref([])
@@ -131,11 +133,18 @@ const rows = computed(() => {
 const activeId = ref(null)
 const activeBook = computed(() => books.value.find(b => b.id === activeId.value) || null)
 
-function select (book) {
-  activeId.value = activeId.value === book.id ? null : book.id
+async function select (book) {
+  const isOpening = activeId.value !== book.id
+  activeId.value = isOpening ? book.id : null
+
+  if (isOpening) {
+    await nextTick()
+    revealDetailOnMobile()
+  }
 }
 
 const shelfRef = ref(null)
+const detailRef = ref(null)
 const shelfHeight = ref(0)
 
 function syncHeight () {
@@ -147,6 +156,15 @@ function syncHeight () {
 const detailStyle = computed(() =>
   shelfHeight.value > 0 ? { height: shelfHeight.value + 'px' } : {}
 )
+
+function revealDetailOnMobile () {
+  if (!window.matchMedia('(max-width: 680px)').matches || !detailRef.value) return
+
+  detailRef.value.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  })
+}
 
 let ro = null
 onMounted(() => {
@@ -472,6 +490,7 @@ onUnmounted(() => { if (ro) ro.disconnect() })
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  scroll-margin-top: 64px;
 }
 
 /* ──────────────────────────────────────────────
@@ -709,9 +728,11 @@ onUnmounted(() => { if (ro) ro.disconnect() })
 
   .bs-detail-area {
     width: 100%;
+    height: auto !important;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow: visible;
   }
 
   .bs-card,
@@ -731,7 +752,14 @@ onUnmounted(() => { if (ro) ro.disconnect() })
   }
 
   .bs-card {
+    flex: none;
+    min-height: 0;
     overflow-y: visible;
+  }
+
+  .bs-card-body {
+    flex: none;
+    overflow: visible;
   }
 }
 </style>
