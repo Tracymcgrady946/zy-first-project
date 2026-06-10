@@ -7,17 +7,32 @@
     "contact": "AI Pulse"
   },
   "hero": {
-    "name": "Zhang Yue",
+    "name": "AugenBlick",
     "role": "Front-End Engineer · Personal Page",
     "introLines": [
       "A front-end engineer and a practitioner reshaping my workflow with AI.",
       "I care about product experience, engineering efficiency, and technology that serves real life."
     ],
-    "infoGender":   { "label": "Gender",      "value": "Male" },
-    "infoHobbies":  { "label": "Hobbies",     "value": "Basketball · Skiing" },
-    "infoLocation": { "label": "Based in",    "value": "Shanghai" },
-    "infoFavCities":{ "label": "Fav. Cities", "value": "Qingdao · Hangzhou · Wanning · Wānaka" },
-    "infoGoals":    { "label": "2026 Goals",  "value": "English · AI Front-End · AI Industries" }
+    "infoGender": {
+      "label": "Gender",
+      "value": "Male"
+    },
+    "infoHobbies": {
+      "label": "Hobbies",
+      "value": "Basketball · Skiing"
+    },
+    "infoLocation": {
+      "label": "Based in",
+      "value": "Shanghai"
+    },
+    "infoFavCities": {
+      "label": "Fav. Cities",
+      "value": "Qingdao · Hangzhou · Wanning · Wānaka"
+    },
+    "infoGoals": {
+      "label": "2026 Goals",
+      "value": "English · AI Front-End · AI Industries"
+    }
   },
   "section": {
     "about": {

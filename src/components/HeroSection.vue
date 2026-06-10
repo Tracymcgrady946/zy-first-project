@@ -43,9 +43,9 @@
     <!-- Vertical Divider -->
     <div class="hero-divider"></div>
 
-    <!-- Right Column: Timeline & 3D Album -->
+    <!-- Right Column: Hiking map -->
     <div class="hero-right">
-      <TimelineAlbum />
+      <OnFootMap />
     </div>
   </section>
 </template>
@@ -53,7 +53,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import TypewriterText from './TypewriterText.vue'
-import TimelineAlbum from './TimelineAlbum.vue'
+import OnFootMap from './OnFootMap.vue'
 
 const props = defineProps({
   hero: { type: Object, required: true }
@@ -68,7 +68,10 @@ function onScroll () {
   if (scrollTicking) return
   scrollTicking = true
   requestAnimationFrame(() => {
-    isScrolled.value = window.scrollY > 80
+    const next = window.scrollY > 80
+    if (isScrolled.value !== next) {
+      isScrolled.value = next
+    }
     scrollTicking = false
   })
 }

@@ -7,17 +7,32 @@
     "contact": "AI 动态"
   },
   "hero": {
-    "name": "张岳",
+    "name": "AugenBlick",
     "role": "前端工程师 · 个人介绍",
     "introLines": [
-      "一名前端工程师，也是一名持续用 AI 重塑工作方式的实践者。",
-      "我关注产品体验、工程效率，也相信技术最终要服务于真实生活。"
+      "能克己，方能成己。",
+      "世上没有 巧合，没有 ”偶然“发生的事情。每件事，每次遇险都是你的自我召唤给你的自我的，目的是让你能够创造和经验到你的真实身份。"
     ],
-    "infoGender":   { "label": "性别",     "value": "男" },
-    "infoHobbies":  { "label": "爱好",     "value": "篮球 · 滑雪" },
-    "infoLocation": { "label": "坐标",     "value": "上海" },
-    "infoFavCities":{ "label": "最爱城市", "value": "青岛 · 杭州 · 万宁 · 瓦纳卡" },
-    "infoGoals":    { "label": "2026 目标","value": "English · AI 前端实践 · AI 跨行业" }
+    "infoGender": {
+      "label": "性别",
+      "value": "男"
+    },
+    "infoHobbies": {
+      "label": "爱好",
+      "value": "篮球 · 滑雪 · 徒步"
+    },
+    "infoLocation": {
+      "label": "坐标",
+      "value": "上海"
+    },
+    "infoFavCities": {
+      "label": "最爱城市",
+      "value": "青岛 · 杭州 · 万宁 · 瓦纳卡"
+    },
+    "infoGoals": {
+      "label": "2026 目标",
+      "value": "English · AI 前端实践 · AI 跨行业"
+    }
   },
   "section": {
     "about": {

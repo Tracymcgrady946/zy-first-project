@@ -28,6 +28,12 @@ import weightManage4 from '../assets/img/project/weight-manage/weight-manage-4.P
 import weightManage5 from '../assets/img/project/weight-manage/weight-manage-5.PNG'
 import weightManage6 from '../assets/img/project/weight-manage/weight-manage-6.PNG'
 import weightManage7 from '../assets/img/project/weight-manage/weight-manage-7.PNG'
+import wangshan1 from '../assets/img/onFoot/suzhou-wangshan/wangshan-01.jpg'
+import jiuxi1 from '../assets/img/onFoot/hangzhou-jiuxi/jiuxi-01.jpg'
+import qinchushi1 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-01.jpg'
+import qinchushi2 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-02.jpg'
+import qinchushi3 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-03.jpg'
+import shuitongao1 from '../assets/img/onFoot/taizhou-shuitongao/shuitongao-01.jpg'
 
 const timelinePlaceholderMedia = [
   { type: 'image', src: profile1, alt: '时光' },
@@ -38,16 +44,16 @@ const timelinePlaceholderMedia = [
 ]
 
 const profileZhCN = {
-  name: '张岳',
+  name: 'AugenBlick',
   role: '前端工程师 · 个人介绍',
   photo_url: profilePhoto,
   introLines: [
-    '一名前端工程师，也是一名持续用 AI 重塑工作方式的实践者。',
-    '我关注产品体验、工程效率，也相信技术最终要服务于真实生活。'
+    '能克己，方能成己。',
+    '世上没有 巧合，没有 ”偶然“发生的事情。每件事，每次遇险都是你的自我召唤给你的自我的，目的是让你能够创造和经验到你的真实身份。'
   ],
   infoList: [
     { icon: '♂', label: '性别', value: '男', href: null },
-    { icon: '✦', label: '爱好', value: '篮球 · 滑雪', href: null },
+    { icon: '✦', label: '爱好', value: '篮球 · 滑雪 · 徒步', href: null },
     { icon: '◎', label: '坐标', value: '上海', href: null },
     { icon: '✈', label: '最爱城市', value: '青岛 · 杭州 · 万宁 · 瓦纳卡', href: null },
     { icon: '◈', label: '2026 目标', value: 'English · AI 前端实践 · AI 跨行业', href: null },
@@ -56,7 +62,7 @@ const profileZhCN = {
 }
 
 const profileEnUS = {
-  name: 'Zhang Yue',
+  name: 'AugenBlick',
   role: 'Front-End Engineer · Personal Page',
   photo_url: profilePhoto,
   introLines: [
@@ -287,6 +293,92 @@ const timelineEnUS = [
   { year: '2020', title: 'New Beginnings', media: timelinePlaceholderMedia }
 ]
 
+const onFootHikesZhCN = [
+  {
+    id: 'suzhou-wangshan',
+    name: '苏州 · 旺山大环线徒步',
+    shortName: '旺山大环线',
+    address: '江苏省苏州市吴中区越溪街道旺山村',
+    amapQuery: '苏州旺山景区',
+    status: '已完成',
+    date: '2026-03-21',
+    lng: 120.58547,
+    lat: 31.21305,
+    color: '#22c55e',
+    photos: [
+      { src: wangshan1, alt: '苏州旺山大环线徒步照片' }
+    ]
+  },
+  {
+    id: 'hangzhou-jiuxi',
+    name: '杭州 · 九溪十八涧',
+    shortName: '九溪十八涧',
+    address: '浙江省杭州市西湖区九溪十八涧',
+    amapQuery: '杭州九溪十八涧',
+    status: '已完成',
+    date: '2026-04',
+    lng: 120.10645,
+    lat: 30.206198,
+    color: '#60a5fa',
+    photos: [
+      { src: jiuxi1, alt: '杭州九溪十八涧徒步照片' }
+    ]
+  },
+  {
+    id: 'shenzhen-qinchushi',
+    name: '深圳 · 螓蜍石滑草游乐园徒步',
+    shortName: '螓蜍石',
+    address: '广东省深圳市光明区光明滑草游乐园',
+    amapQuery: '深圳光明滑草游乐园',
+    status: '已完成',
+    date: '2026-05-02',
+    lng: 113.9539,
+    lat: 22.7488,
+    color: '#f59e0b',
+    photos: [
+      { src: qinchushi1, alt: '深圳螓蜍石徒步照片 1' },
+      { src: qinchushi2, alt: '深圳螓蜍石徒步照片 2' },
+      { src: qinchushi3, alt: '深圳螓蜍石徒步照片 3' }
+    ]
+  },
+  {
+    id: 'taizhou-shuitongao',
+    name: '台州 · 温岭水桶岙',
+    shortName: '温岭水桶岙',
+    address: '浙江省台州市温岭市水桶岙',
+    amapQuery: '温岭水桶岙',
+    status: '已完成',
+    date: '2026-05-30',
+    lng: 121.64083374,
+    lat: 28.3439308,
+    color: '#f43f5e',
+    photos: [
+      { src: shuitongao1, alt: '台州温岭水桶岙徒步照片' }
+    ]
+  }
+]
+
+const onFootHikesEnUS = onFootHikesZhCN.map(item => ({
+  ...item,
+  name: {
+    'suzhou-wangshan': 'Suzhou · Wangshan Loop Hike',
+    'hangzhou-jiuxi': 'Hangzhou · Nine Creeks',
+    'shenzhen-qinchushi': 'Shenzhen · Qinchushi Grass-Skiing Park Hike',
+    'taizhou-shuitongao': 'Taizhou · Wenling Shuitongao'
+  }[item.id],
+  shortName: {
+    'suzhou-wangshan': 'Wangshan Loop',
+    'hangzhou-jiuxi': 'Nine Creeks',
+    'shenzhen-qinchushi': 'Qinchushi',
+    'taizhou-shuitongao': 'Shuitongao'
+  }[item.id],
+  status: 'Completed',
+  photos: item.photos.map(photo => ({
+    ...photo,
+    alt: photo.alt.replace('徒步照片', 'hiking photo')
+  }))
+}))
+
 const books = [
   { id: 1, title: '人类简史', author: '尤瓦尔·赫拉利', color: '#9B6A2F', height: 172, width: 38, year: '2023', rating: 5, intro: '从认知革命、农业革命到科学革命，赫拉利以宏观视角重新梳理了人类700万年的历史。他提出了一个震撼性论断：人类之所以能统治世界，不是因为更聪明，而是因为能够创造并相信"虚构的故事"——宗教、国家、金钱与法律。', notes: '1. 农业革命是人类史上最大的骗局\n小麦"驯化"了人类，而非人类驯化了小麦。农业革命从个体角度看是退步——更辛苦、食物更单一——却从种群角度推动了文明进程。让我开始质疑"进步"的真实含义。\n\n2. 虚构让人类统治世界\n货币、公司、法律、国家都是人类集体相信的"故事"。这些虚构不是谎言，而是构建文明的工具。只有人类能与素昧平生的数百万人合作，因为我们共享同样的虚构现实。\n\n3. 幸福感从未真正增加\n从狩猎采集到农业社会再到工业时代，生产力提升了千倍，个体的幸福感却未必同步增长。这让我对"更多、更快、更好"的现代信条有了更批判性的审视。' },
   { id: 2, title: '穷查理宝典', author: '查理·芒格', color: '#1E3A5F', height: 188, width: 46, year: '2024', rating: 5, intro: '查理·芒格毕生的思维精华，涵盖投资哲学、商业洞察和人生智慧。核心思想是"多元思维模型"——从物理学、心理学、经济学等多个学科借鉴工具，用跨学科视角解决复杂问题，是一套思考框架和人生哲学。', notes: '1. 反转，永远反转\n与其思考如何成功，不如先想清楚如何避免失败。应用到产品设计：与其想用户喜欢什么，不如先列出所有用户会讨厌的体验，逐一消除。这是一种非常实用的逆向思维工具。\n\n2. 多元思维模型\n单一学科的知识容易让人用一把锤子看到处都是钉子。芒格强调从物理学、心理学、经济学等多学科借鉴工具，用跨学科视角解决复杂问题。这让我开始主动跨领域阅读。\n\n3. 心理倾向清单\n这章让我意识到自己有多少认知偏差：社会认同偏差、可得性启发、确认偏见……认识到偏差的存在是克服它的第一步，促使我开始建立自己的思维模型库。' },
@@ -331,38 +423,42 @@ const techLinks = [
   { name: 'MDN', url: 'https://developer.mozilla.org' }
 ]
 
-export function getMockProfile(locale) {
+export function getMockProfile (locale) {
   return locale === 'en-US' ? profileEnUS : profileZhCN
 }
 
-export function getMockNav(locale) {
+export function getMockNav (locale) {
   return locale === 'en-US' ? navEnUS : navZhCN
 }
 
-export function getMockSections(locale) {
+export function getMockSections (locale) {
   return locale === 'en-US' ? sectionsEnUS : sectionsZhCN
 }
 
-export function getMockConfig() {
+export function getMockConfig () {
   return siteConfig
 }
 
-export function getMockProjects(locale) {
+export function getMockProjects (locale) {
   return locale === 'en-US' ? projectsEnUS : projectsZhCN
 }
 
-export function getMockTimeline(locale) {
+export function getMockTimeline (locale) {
   return locale === 'en-US' ? timelineEnUS : timelineZhCN
 }
 
-export function getMockBooks() {
+export function getMockOnFootHikes (locale) {
+  return locale === 'en-US' ? onFootHikesEnUS : onFootHikesZhCN
+}
+
+export function getMockBooks () {
   return books
 }
 
-export function getMockAiDynamics() {
+export function getMockAiDynamics () {
   return aiDynamics
 }
 
-export function getMockTechLinks() {
+export function getMockTechLinks () {
   return techLinks
 }

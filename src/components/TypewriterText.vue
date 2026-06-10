@@ -21,8 +21,14 @@ function typeNext(index) {
   timer = setTimeout(() => typeNext(index + 1), props.speed)
 }
 
-watch(() => props.text, () => {
+watch(() => [props.text, props.showCursor], () => {
   clearTimeout(timer)
+  timer = null
+  if (!props.showCursor) {
+    displayedText.value = props.text
+    return
+  }
+
   displayedText.value = ''
   if (!props.text) return
   timer = setTimeout(() => typeNext(0), props.startAfter)

@@ -1,5 +1,6 @@
 <template>
-  <div class="project-timeline">
+  <div ref="rootRef"
+    class="project-timeline">
     <!-- 水平时间轴轨道 -->
     <div class="pt-rail">
       <template v-for="(project, idx) in projects" :key="project.key">
@@ -48,6 +49,8 @@
                   v-if="card.type === 'image' && card.src"
                   :src="card.src"
                   :alt="card.alt || ''"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div
                   v-else
@@ -167,7 +170,10 @@ function openPreview(idx) {
 // ── 3D 轮播状态 ──
 const rotationAngle = ref(0)
 const sceneRef = ref(null)
+const rootRef = ref(null)
 let rafId = null
+let visibilityObserver = null
+const isVisible = ref(false)
 let isDragging = false
 let hasDragged = false
 let pointerStartX = 0
@@ -191,10 +197,13 @@ function rotateBy(dir) {
   if (!count) return
   stopAutoRotate()
   rotationAngle.value -= dir * (360 / count)
-  setTimeout(startAutoRotate, 2000)
+  setTimeout(() => {
+    if (isVisible.value) startAutoRotate()
+  }, 2000)
 }
 
 function startAutoRotate() {
+  if (!isVisible.value || selectedIdx.value === null || !displayCards.value.length) return
   stopAutoRotate()
   let last = null
   function tick(ts) {
@@ -232,7 +241,7 @@ function onPointerMove(e) {
 function onPointerUp(e) {
   if (!isDragging) return
   isDragging = false
-  startAutoRotate()
+  if (isVisible.value) startAutoRotate()
   // setPointerCapture 会把 click 事件吸附到 scene，所以在 pointerup 时手动判断点击的卡片
   if (!hasDragged && e.type === 'pointerup' && pointerDownTarget) {
     const cardEl = pointerDownTarget.closest('[data-card-idx]')
@@ -247,7 +256,7 @@ function onPointerUp(e) {
 // ── 切换项目时重置轮播（immediate 确保初始选中也启动旋转）──
 watch(selectedIdx, (val) => {
   rotationAngle.value = 0
-  if (val !== null) startAutoRotate()
+  if (val !== null && isVisible.value) startAutoRotate()
   else stopAutoRotate()
 }, { immediate: true })
 
@@ -259,8 +268,26 @@ function closePanel() {
   selectedIdx.value = null
 }
 
-onMounted(loadProjects)
-onBeforeUnmount(stopAutoRotate)
+function setupVisibilityObserver () {
+  visibilityObserver = new IntersectionObserver(([entry]) => {
+    isVisible.value = Boolean(entry?.isIntersecting)
+    if (isVisible.value) startAutoRotate()
+    else stopAutoRotate()
+  }, { threshold: 0.12 })
+
+  if (rootRef.value) visibilityObserver.observe(rootRef.value)
+}
+
+onMounted(() => {
+  loadProjects()
+  setupVisibilityObserver()
+})
+onBeforeUnmount(() => {
+  stopAutoRotate()
+  if (visibilityObserver && rootRef.value) {
+    visibilityObserver.unobserve(rootRef.value)
+  }
+})
 </script>
 
 <style scoped>

@@ -37,7 +37,7 @@
       <AiDynamics :section="contactSection" />
     </ScrollReveal>
 
-    <ScrollReveal>
+    <ScrollReveal eager>
       <QuotesSection />
     </ScrollReveal>
   </div>

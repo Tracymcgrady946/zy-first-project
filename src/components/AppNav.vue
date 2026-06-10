@@ -77,9 +77,7 @@ function onMobileNavClick (href) {
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(0, 0, 0, 0.88);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -185,9 +183,7 @@ function onMobileNavClick (href) {
   top: 48px;
   left: 0;
   right: 0;
-  background: rgba(18, 18, 20, 0.96);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(18, 18, 20, 0.98);
   z-index: 9998;
   display: flex;
   flex-direction: column;

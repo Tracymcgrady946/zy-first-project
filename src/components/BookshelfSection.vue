@@ -114,6 +114,13 @@
 import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import { api } from '@/api/index.js'
 
+defineProps({
+  section: {
+    type: Object,
+    default: null
+  }
+})
+
 const books = ref([])
 
 async function loadBooks() {
