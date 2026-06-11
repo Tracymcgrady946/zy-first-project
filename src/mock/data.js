@@ -84,7 +84,8 @@ const navZhCN = [
   { label: '项目经历', href: '#about' },
   { label: '阅读', href: '#reading' },
   { label: 'Skill', href: '#skills' },
-  { label: 'AI 动态', href: '#contact' }
+  { label: 'AI 动态', href: '#contact' },
+  { label: '语录', href: '#quotes' }
 ]
 
 const navEnUS = [
@@ -92,7 +93,8 @@ const navEnUS = [
   { label: 'Projects', href: '#about' },
   { label: 'Reading', href: '#reading' },
   { label: 'Skills', href: '#skills' },
-  { label: 'AI Pulse', href: '#contact' }
+  { label: 'AI Pulse', href: '#contact' },
+  { label: 'Quotes', href: '#quotes' }
 ]
 
 const sectionsZhCN = [
@@ -416,6 +418,91 @@ const aiDynamics = {
   ]
 }
 
+const quotesZhCN = [
+  {
+    id: 1,
+    text: '大彻大悟，并非源于经历万千或发现伟大真理，而是终于允许自己失控，洞见生命本质的广阔流动。你终于明白，真实胜过正确，体验胜过结果，存在本身即是圆满。越是追求顺畅、线性、确定性的生活，现实越会让你受挫，你越容易被击败。世界，从来都是不确定的。'
+  },
+  {
+    id: 2,
+    text: '人生的本质，就是一个人活着。不要对别人心存太多期待，我们总是想要找到能为自己分担痛苦和悲伤的人，可大多时候，我们那些惊天动地的伤痛，在别人眼里，不过是随手拂过的尘埃。或许，成年人的孤独，就是悲喜自渡，而这也正是我们难得的自由。'
+  },
+  {
+    id: 3,
+    text: '实际上开心不值得追求。内心的自治和圆融，内心的平静和安稳，那个东西它才值得高于开心去追求的一个东西啊。'
+  },
+  {
+    id: 4,
+    text: '终有一天你会静下心来，像个局外人一样回顾自己的故事。然后笑着摇头，浮生不过梦一场。这世间什么都是假的，而你却认真了一辈子。把尘事看清一些，把人际看浅一些。把得失看淡一些，把成败看开一些。一念执着万般皆苦，一念放下万般自在。'
+  },
+  {
+    id: 5,
+    text: '你贪念的最终是牢笼，你恐惧的恰恰是解脱！'
+  },
+  {
+    id: 6,
+    text: '真正困住一个人的，从来不是当下的处境，而是你反复给自己讲述的那个旧故事。'
+  },
+  {
+    id: 7,
+    text: '不要急着证明自己正确。很多时候，安静地把路走完，比赢下一场争辩更有力量。'
+  },
+  {
+    id: 8,
+    text: '你以为失去的是某个人，其实失去的是那个曾经把希望寄托在别人身上的自己。'
+  },
+  {
+    id: 9,
+    text: '人生最清醒的时刻，往往不是看见答案，而是终于承认自己不必拥有所有答案。'
+  },
+  {
+    id: 10,
+    text: '越想控制一切，越会被无常教育；越能允许变化，越容易在变化里站稳。'
+  },
+  {
+    id: 11,
+    text: '很多关系走到最后，不是输给了谁，而是输给了彼此都不再愿意真实地出现。'
+  },
+  {
+    id: 12,
+    text: '成年人真正的自由，是不再等待谁来理解自己，也不再把理解当作被爱的证明。'
+  },
+  {
+    id: 13,
+    text: '低谷不是惩罚，它只是把你从热闹里带走，让你重新听见内心真正的声音。'
+  },
+  {
+    id: 14,
+    text: '你不需要把每一次痛苦都解释成意义。有些事只是发生了，然后你继续活着。'
+  },
+  {
+    id: 15,
+    text: '真正的成长，不是变得无坚不摧，而是在破碎之后，依然愿意温柔地重建自己。'
+  },
+  {
+    id: 16,
+    text: '一个人最稳定的底气，是知道自己会害怕，也知道自己依然可以带着害怕往前走。'
+  },
+  {
+    id: 17,
+    text: '别把短暂的情绪，当成永恒的命运。风会过去，雾会散开，你也会重新看清路。'
+  },
+  {
+    id: 18,
+    text: '世界不会按照你的期待展开，但你可以一次次把自己从期待落空里接回来。'
+  },
+  {
+    id: 19,
+    text: '很多时候，所谓放下不是不在乎了，而是终于不再拿过去惩罚现在的自己。'
+  },
+  {
+    id: 20,
+    text: '当你开始允许自己慢一点，生命里那些真正重要的东西，反而会慢慢靠近你。'
+  }
+]
+
+const quotesEnUS = quotesZhCN
+
 const techLinks = [
   { name: 'Vue', url: 'https://vuejs.org' },
   { name: 'React', url: 'https://react.dev' },
@@ -457,6 +544,10 @@ export function getMockBooks () {
 
 export function getMockAiDynamics () {
   return aiDynamics
+}
+
+export function getMockQuotes (locale) {
+  return locale === 'en-US' ? quotesEnUS : quotesZhCN
 }
 
 export function getMockTechLinks () {

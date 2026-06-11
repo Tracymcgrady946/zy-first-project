@@ -159,22 +159,32 @@ function resetPlainEntryScroll () {
 }
 
 function normalizeNav (nav) {
-  const filtered = nav.filter(item =>
+  let normalized = nav.filter(item =>
     !REMOVED_SECTION_IDS.some(id => item.href === `#${id}`)
   )
-  if (filtered.some(item => item.href === '#skills')) return filtered
 
-  const skillItem = {
+  const ensureNavItem = (item, afterHref) => {
+    if (normalized.some(navItem => navItem.href === item.href)) return
+    const afterIndex = normalized.findIndex(navItem => navItem.href === afterHref)
+    const insertIndex = afterIndex >= 0 ? afterIndex + 1 : normalized.length
+    normalized = [
+      ...normalized.slice(0, insertIndex),
+      item,
+      ...normalized.slice(insertIndex)
+    ]
+  }
+
+  ensureNavItem({
     label: locale.value === 'en-US' ? 'Skills' : 'Skill',
     href: '#skills'
-  }
-  const readingIndex = filtered.findIndex(item => item.href === '#reading')
-  const insertIndex = readingIndex >= 0 ? readingIndex + 1 : filtered.length
-  return [
-    ...filtered.slice(0, insertIndex),
-    skillItem,
-    ...filtered.slice(insertIndex)
-  ]
+  }, '#reading')
+
+  ensureNavItem({
+    label: locale.value === 'en-US' ? 'Quotes' : '语录',
+    href: '#quotes'
+  }, '#contact')
+
+  return normalized
 }
 
 function normalizeSections (secs) {

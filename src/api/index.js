@@ -24,4 +24,5 @@ export const api = {
   getOnFootHikes: maybeMock((locale) => get(`/on-foot?locale=${locale}`), mock.getMockOnFootHikes),
   getBooks:      maybeMock(() => get('/books'), mock.getMockBooks),
   getAiDynamics: maybeMock(() => get('/ai'), mock.getMockAiDynamics),
+  getQuotes:     maybeMock((locale) => get(`/quotes?locale=${locale}`), mock.getMockQuotes),
 }
