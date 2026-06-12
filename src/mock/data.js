@@ -38,6 +38,8 @@ import qinchushi1 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-01.jpg
 import qinchushi2 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-02.jpg'
 import qinchushi3 from '../assets/img/onFoot/shenzhen-qinchushi/qinchushi-03.jpg'
 import shuitongao1 from '../assets/img/onFoot/taizhou-shuitongao/shuitongao-01.jpg'
+// 大青山
+import daqingshan1 from '../assets/img/onFoot/daqinngshan/daqingshan-01.png'
 
 const timelinePlaceholderMedia = [
   { type: 'image', src: profile1, alt: '时光' },
@@ -365,6 +367,21 @@ const onFootHikesZhCN = [
     color: '#f43f5e',
     photos: [
       { src: shuitongao1, alt: '台州温岭水桶岙徒步照片' }
+    ]
+  },
+  {
+    id: 'chifeng-daqingshan',
+    name: '赤峰 · 大青山大裂缝徒步',
+    shortName: '大青山大裂缝',
+    address: '内蒙古自治区赤峰市克什克腾旗大青山景区',
+    amapQuery: '克什克腾旗大青山景区',
+    status: '计划中',
+    date: '2026-06-12',
+    lng: 117.545,
+    lat: 43.248,
+    color: '#3b82f6',
+    photos: [
+      { src: daqingshan1, alt: '赤峰大青山大裂缝徒步照片' }
     ]
   }
 ]
