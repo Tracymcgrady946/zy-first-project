@@ -8,7 +8,7 @@
     </ScrollReveal>
 
     <!-- About (project experience) section -->
-    <ScrollReveal v-if="aboutSection">
+    <ScrollReveal v-if="aboutSection" eager>
       <SectionBlock :section-id="aboutSection.id"
         :title="aboutSection.title"
         :description="aboutSection.description"
@@ -210,8 +210,4 @@ watch(locale, loadData)
 onMounted(loadData)
 </script>
 
-<style scoped>
-.page-home {
-  min-height: 100vh;
-}
-</style>
+<style scoped src="@/assets/styles/components/Home.css"></style>

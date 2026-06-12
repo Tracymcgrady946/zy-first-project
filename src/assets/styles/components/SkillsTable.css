@@ -1,0 +1,148 @@
+.skills-panel {
+  margin: 28px auto 0;
+  width: min(100%, 1040px);
+  text-align: left;
+}
+
+.skills-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--apple-text-secondary);
+  font-size: 13px;
+}
+
+.skills-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  scrollbar-color: rgba(41, 151, 255, 0.45) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+.skills-table-wrap::-webkit-scrollbar {
+  height: 8px;
+}
+
+.skills-table-wrap::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 8px 8px;
+}
+
+.skills-table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(41, 151, 255, 0.45);
+  border-radius: 999px;
+}
+
+.skills-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(41, 151, 255, 0.65);
+}
+
+.skills-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  color: var(--apple-text);
+  font-size: 14px;
+}
+
+.skills-table th,
+.skills-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  vertical-align: top;
+}
+
+.skills-table th {
+  color: var(--apple-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.skills-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.skill-name {
+  width: 170px;
+  color: #6ee7b7;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.skill-path {
+  width: 230px;
+  color: var(--apple-text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.skills-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.skills-more {
+  border: 1px solid rgba(41, 151, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(41, 151, 255, 0.12);
+  color: var(--apple-link);
+  cursor: pointer;
+  font-family: var(--font-apple);
+  font-size: 14px;
+  padding: 9px 18px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.skills-more:hover {
+  background: rgba(41, 151, 255, 0.2);
+  border-color: rgba(41, 151, 255, 0.45);
+}
+
+.skills-more--secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--apple-text-secondary);
+}
+
+.skills-more--secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--apple-text);
+}
+
+@media (max-width: 640px) {
+  .skills-meta {
+    flex-direction: column;
+  }
+
+  .skills-panel {
+    margin-top: 22px;
+  }
+
+  .skills-table {
+    min-width: 860px;
+    font-size: 13px;
+  }
+
+  .skills-table th,
+  .skills-table td {
+    padding: 12px;
+  }
+
+  .skill-name {
+    width: 150px;
+  }
+
+  .skill-path {
+    width: 210px;
+  }
+}

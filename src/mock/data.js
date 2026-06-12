@@ -21,6 +21,10 @@ import fourHigh6 from '../assets/img/project/four-high/four-high-6.PNG'
 import fourHigh7 from '../assets/img/project/four-high/four-high-7.PNG'
 import fourHigh8 from '../assets/img/project/four-high/four-high-8.PNG'
 import fourHigh9 from '../assets/img/project/four-high/four-high-9.PNG'
+import lightspot1 from '../assets/img/project/lightspot/page1.png'
+import lightspot2 from '../assets/img/project/lightspot/page2.png'
+import lightspot3 from '../assets/img/project/lightspot/page3.png'
+import lightspot5 from '../assets/img/project/lightspot/page5.png'
 import weightManage1 from '../assets/img/project/weight-manage/weight-manage-1.PNG'
 import weightManage2 from '../assets/img/project/weight-manage/weight-manage-2.PNG'
 import weightManage3 from '../assets/img/project/weight-manage/weight-manage-3.PNG'
@@ -49,7 +53,7 @@ const profileZhCN = {
   photo_url: profilePhoto,
   introLines: [
     '能克己，方能成己。',
-    '世上没有 巧合，没有 ”偶然“发生的事情。每件事，每次遇险都是你的自我召唤给你的自我的，目的是让你能够创造和经验到你的真实身份。'
+    '世上没有 巧合，没有 “偶然”发生的事情。每件事，每次遇险都是你的自我召唤给你的自我的，目的是让你能够创造和经验到你的真实身份。'
   ],
   infoList: [
     { icon: '♂', label: '性别', value: '男', href: null },
@@ -192,7 +196,12 @@ const projectsZhCN = [
       '引入 ECharts + Canvas 双引擎可视化方案，兼顾灵活性与渲染性能',
       '建立前端工程规范：ESLint + Prettier + Husky，保障团队代码一致性'
     ],
-    media: []
+    media: [
+      { type: 'image', src: lightspot1, alt: '亮点' },
+      { type: 'image', src: lightspot2, alt: '亮点' },
+      { type: 'image', src: lightspot3, alt: '亮点' },
+      { type: 'image', src: lightspot5, alt: '亮点' },
+    ]
   }
 ]
 

@@ -1,0 +1,586 @@
+/* ──────────────────────────────────────────────
+   Section wrapper
+────────────────────────────────────────────── */
+.reading-section {
+  background: #0a0a0a;
+  padding: 72px 16px 88px;
+  padding-left: calc(16px + env(safe-area-inset-left));
+  padding-right: calc(16px + env(safe-area-inset-right));
+  padding-bottom: calc(88px + env(safe-area-inset-bottom));
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────────
+   Section header
+────────────────────────────────────────────── */
+.reading-header {
+  max-width: 680px;
+  margin: 0 auto 52px;
+  text-align: center;
+}
+
+.reading-title {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  background: linear-gradient(90deg, #f5f5f7 0%, #2997ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.reading-desc {
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  margin: 0;
+  background: linear-gradient(90deg, #a1a1a6 0%, #2997ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ──────────────────────────────────────────────
+   Two-column layout
+────────────────────────────────────────────── */
+.reading-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: min(92vw, 960px);
+  margin: 0 auto;
+}
+
+/* ──────────────────────────────────────────────
+   Left: Bookshelf area
+────────────────────────────────────────────── */
+.bs-shelf-area {
+  flex: 0 0 42%;
+  position: relative;
+  padding-top: 70px;
+}
+
+/* ──────────────────────────────────────────────
+   Hanging lamp
+────────────────────────────────────────────── */
+.bs-lamp {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.bs-wire {
+  width: 2px;
+  height: 26px;
+  background: linear-gradient(to bottom, #3a3a3a 0%, #504030 100%);
+}
+
+.bs-shade {
+  width: 68px;
+  height: 36px;
+  background: linear-gradient(180deg, #171208 0%, #23190c 55%, #171208 100%);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  border-radius: 0 0 3px 3px;
+  box-shadow: inset 0 -1px 0 rgba(255, 210, 80, 0.08),
+    0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.bs-glow {
+  width: 72px;
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 210, 80, 0.4) 0%,
+    rgba(255, 230, 120, 0.95) 50%,
+    rgba(255, 210, 80, 0.4) 100%
+  );
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 0 6px 3px rgba(255, 218, 80, 0.85),
+    0 0 18px 9px rgba(255, 200, 60, 0.45),
+    0 0 45px 22px rgba(255, 185, 40, 0.22),
+    0 0 90px 45px rgba(255, 165, 20, 0.09);
+}
+
+/* ──────────────────────────────────────────────
+   Light beam / cone effect
+────────────────────────────────────────────── */
+.bs-light-beam {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 115%;
+  height: calc(100% - 60px);
+  background: radial-gradient(
+    ellipse 82% 58% at 50% 0%,
+    rgba(255, 222, 100, 0.14) 0%,
+    rgba(255, 210, 80, 0.08) 22%,
+    rgba(255, 195, 60, 0.04) 45%,
+    rgba(255, 180, 40, 0.01) 62%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ──────────────────────────────────────────────
+   Shelf cabinet
+────────────────────────────────────────────── */
+.bs-cabinet {
+  position: relative;
+  border: 1px solid rgba(255, 210, 80, 0.07);
+  border-radius: 6px;
+  padding: 18px 18px 0;
+  z-index: 3;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  background: radial-gradient(
+      ellipse 85% 38% at 50% 0%,
+      rgba(255, 200, 60, 0.045) 0%,
+      transparent 68%
+    ),
+    #060503;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.92),
+    0 10px 50px rgba(0, 0, 0, 0.75), inset 1px 1px 0 rgba(255, 220, 80, 0.04);
+}
+
+/* ──────────────────────────────────────────────
+   Shelf row
+────────────────────────────────────────────── */
+.bs-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  min-height: 196px;
+  position: relative;
+  z-index: 4;
+  perspective: 760px;
+  transform-style: preserve-3d;
+}
+
+/* ──────────────────────────────────────────────
+   Shelf plank
+────────────────────────────────────────────── */
+.bs-plank {
+  height: 14px;
+  background: linear-gradient(to bottom, #2e2214, #1c1409, #100e06);
+  border-radius: 1px;
+  margin: 0 -5px 18px;
+  position: relative;
+  z-index: 4;
+  transform-style: preserve-3d;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.85), 0 2px 5px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 200, 80, 0.07);
+}
+
+.bs-plank::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 8px;
+  background: linear-gradient(to bottom, #161008, #080604);
+  transform: rotateX(-68deg);
+  transform-origin: top;
+  box-shadow: 0 9px 14px rgba(0, 0, 0, 0.62);
+}
+
+.bs-plank:last-child {
+  margin-bottom: 0;
+}
+
+/* ──────────────────────────────────────────────
+   Book
+────────────────────────────────────────────── */
+.bs-book {
+  flex: 0 0 var(--bw);
+  height: var(--bh);
+  background-color: var(--bc);
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.48) 0%,
+    rgba(0, 0, 0, 0.16) 14%,
+    rgba(255, 255, 255, 0.03) 65%,
+    rgba(255, 255, 255, 0.09) 84%,
+    rgba(0, 0, 0, 0.32) 100%
+  );
+  border-radius: 1px 3px 3px 1px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transform: rotateY(-9deg) translateZ(0);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease, filter 0.28s ease;
+  box-shadow: 8px 5px 12px rgba(0, 0, 0, 0.46),
+    -1px 0 3px rgba(0, 0, 0, 0.45),
+    inset 2px 0 0 rgba(255, 255, 255, 0.08),
+    inset -5px 0 12px rgba(0, 0, 0, 0.22);
+}
+
+.bs-book::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -8px;
+  width: 8px;
+  height: calc(100% - 6px);
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.4)),
+    var(--bc);
+  transform: rotateY(76deg);
+  transform-origin: left center;
+  filter: brightness(0.82);
+}
+
+.bs-book::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: -12px;
+  width: 7px;
+  height: calc(100% - 16px);
+  border-radius: 0 2px 2px 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 246, 220, 0.78) 0,
+    rgba(255, 246, 220, 0.78) 2px,
+    rgba(188, 172, 138, 0.58) 3px
+  );
+  transform: rotateY(84deg);
+  transform-origin: left center;
+  opacity: 0.74;
+}
+
+.bs-book:hover {
+  transform: translateY(-14px) rotateY(-24deg) translateZ(18px);
+  filter: brightness(1.22);
+  box-shadow: 16px 12px 24px rgba(0, 0, 0, 0.58),
+    -1px 0 4px rgba(0, 0, 0, 0.45),
+    inset 2px 0 0 rgba(255, 255, 255, 0.12),
+    inset -5px 0 13px rgba(0, 0, 0, 0.24);
+}
+
+.bs-book--active {
+  transform: translateY(-18px) rotateY(-27deg) translateZ(24px) !important;
+  filter: brightness(1.3) !important;
+  box-shadow: 0 0 0 2px rgba(41, 151, 255, 0.65),
+    0 0 18px rgba(41, 151, 255, 0.28),
+    18px 15px 34px rgba(0, 0, 0, 0.66),
+    inset 2px 0 0 rgba(255, 255, 255, 0.13) !important;
+}
+
+/* ──────────────────────────────────────────────
+   Book spine text
+────────────────────────────────────────────── */
+.bs-spine {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  max-height: calc(var(--bh) - 18px);
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+  line-height: 1;
+  padding: 6px 0;
+  transform: translateZ(1px);
+}
+
+/* ──────────────────────────────────────────────
+   Right: Detail area
+────────────────────────────────────────────── */
+.bs-detail-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scroll-margin-top: 64px;
+}
+
+/* ──────────────────────────────────────────────
+   Book card
+────────────────────────────────────────────── */
+.bs-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+/* Fixed header (cover + metadata) */
+.bs-card-head {
+  flex-shrink: 0;
+}
+
+/* Scrollable body */
+.bs-card-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 18px 20px;
+}
+
+.bs-card-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.bs-card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bs-card-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* Decorative cover banner */
+.bs-cover {
+  width: 100%;
+  min-height: 110px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bs-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.bs-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+}
+
+.bs-cover-copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.bs-cover-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bs-cover-author {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 4px 0 0;
+}
+
+.bs-book-stat {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.bs-book-stat--overlay {
+  position: relative;
+  z-index: 1;
+}
+
+.bs-year {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  display: block;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+.bs-rating {
+  display: flex;
+  gap: 2px;
+  justify-content: flex-end;
+}
+
+.bs-star {
+  font-size: 13px;
+  color: #2c2c2e;
+  transition: color 0.2s;
+}
+
+.bs-star.lit {
+  color: #ffd60a;
+}
+
+.bs-block {
+  margin-top: 16px;
+}
+
+.bs-block:first-child {
+  margin-top: 0;
+}
+
+.bs-block-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #2997ff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 7px;
+}
+
+.bs-block-text {
+  font-size: 13px;
+  line-height: 1.88;
+  color: #a1a1a6;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* ──────────────────────────────────────────────
+   Empty state
+────────────────────────────────────────────── */
+.bs-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bs-empty-icon {
+  font-size: 44px;
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.3;
+  filter: grayscale(0.4);
+}
+
+.bs-empty-hint {
+  font-size: 15px;
+  color: #86868b;
+  margin: 0;
+}
+
+.bs-empty-sub {
+  font-size: 13px;
+  color: #3a3a3c;
+  margin: 0;
+}
+
+/* ──────────────────────────────────────────────
+   Slide transition
+────────────────────────────────────────────── */
+.bs-slide-enter-active,
+.bs-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.bs-slide-enter-from {
+  opacity: 0;
+  transform: translateX(18px);
+}
+
+.bs-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-14px);
+}
+
+/* ──────────────────────────────────────────────
+   Responsive
+────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .reading-section {
+    padding-top: 48px;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  .reading-layout {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .bs-shelf-area {
+    flex: none;
+    width: 100%;
+  }
+
+  .bs-detail-area {
+    width: 100%;
+    height: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: visible;
+  }
+
+  .bs-card,
+  .bs-empty {
+    width: 100%;
+    max-width: min(92vw, 420px);
+    margin: 0 auto;
+  }
+
+  .bs-row {
+    min-height: 160px;
+    justify-content: center;
+  }
+
+  .bs-empty {
+    min-height: 220px;
+  }
+
+  .bs-card {
+    flex: none;
+    min-height: 0;
+    overflow-y: visible;
+  }
+
+  .bs-card-body {
+    flex: none;
+    overflow: visible;
+  }
+}

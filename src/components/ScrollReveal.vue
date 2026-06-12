@@ -18,20 +18,28 @@ const root = ref(null)
 const isVisible = ref(false)
 const shouldRender = ref(props.eager)
 let observer = null
+const REVEAL_SECTIONS_EVENT = 'app:reveal-sections'
+
+function reveal () {
+  shouldRender.value = true
+  isVisible.value = true
+  if (observer && root.value) {
+    observer.unobserve(root.value)
+  }
+}
 
 onMounted(() => {
   if (props.skip) {
-    isVisible.value = true
-    shouldRender.value = true
+    reveal()
     return
   }
+
+  window.addEventListener(REVEAL_SECTIONS_EVENT, reveal)
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          shouldRender.value = true
-          isVisible.value = true
-          observer.unobserve(entry.target)
+          reveal()
         }
       })
     },
@@ -46,21 +54,8 @@ onBeforeUnmount(() => {
   if (observer && root.value) {
     observer.unobserve(root.value)
   }
+  window.removeEventListener(REVEAL_SECTIONS_EVENT, reveal)
 })
 </script>
 
-<style scoped>
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  content-visibility: auto;
-  contain-intrinsic-size: 720px;
-}
-
-.scroll-reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+<style scoped src="@/assets/styles/components/ScrollReveal.css"></style>

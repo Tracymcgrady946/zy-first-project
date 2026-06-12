@@ -1,0 +1,22 @@
+.fireworks-background {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 680px) {
+  .fireworks-background {
+    opacity: 0.58;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fireworks-background {
+    display: none;
+  }
+}
